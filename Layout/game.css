@@ -1,0 +1,17 @@
+:root {
+  --background: #6495ed;
+  --heading: #f0f8ff;
+  --text: 
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 400;
+  background-color: var(--background); 
+}
+
+h1 {
+  font-size: 3em;
+  margin: 20px;
+  color: var(--text);
+}
