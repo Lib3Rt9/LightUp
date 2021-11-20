@@ -1,7 +1,7 @@
 # LightUp
 Multiplayer draw-and-guess game
 
-Group Project - 3rd year - university
+Group Project - 3rd year - USTH - university
 
 Member:
   1. PHẠM Gia Phúc
