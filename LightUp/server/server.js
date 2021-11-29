@@ -11,13 +11,17 @@ var server = new WebSocketServer({ port: port });
 // listens to the connection event and handles it
 
 // sends the user count to all the connected users
+// import User and Room
 var User = require('./game').User;
 var Room = require('./game').Room;
 var room1 = new Room();
+
 server.on('connection', function(socket) {
     var user = new User(socket);
     room1.addUser(user);
     console.log("A connection established");
+
+    // sends a server message to all connected clients
     var message = "Welcome " + user.id + " joining the party. Total connection: " + room1.users.length;
     room1.sendAll(message);
 

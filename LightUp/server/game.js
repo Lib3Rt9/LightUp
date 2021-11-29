@@ -1,10 +1,11 @@
-// store game and logic
-// manage all connected sockets
+// store game and logic, manage all connected sockets
 // store socket connection objects and create random ID
 function User(socket) {
-    this.socket = socket; 
+
+    this.socket = socket;
+
     // assign a random number to User.
-    // Long enough to make duplication chance less.
+    // long enough to make duplication chance less.
     this.id = "1" + Math.floor( Math.random() * 1000000000);
    }
 
@@ -15,16 +16,15 @@ function Room() {
     // manages the adding and removing of users
     Room.prototype.addUser = function(user){
         this.users.push(user);
-        
         var room = this;
-        
         
         // handle user closing
         user.socket.onclose = function(){
             console.log('A connection left.');
             room.removeUser(user);
         }
-        
+
+        // call message handler
         this.handleOnUserMessage(user);
     };
 
@@ -48,6 +48,7 @@ function Room() {
     Room.prototype.handleOnUserMessage = function(user) {
         var room = this;
 
+        // send message to alll clients
         user.socket.on("message", function(message){
             console.log("Receive message from " + user.id + ": " + message); 
             // send to all users in room.
@@ -57,7 +58,6 @@ function Room() {
         
     };
 };
-
 
 
 // define User and Room classes to let other files use them
