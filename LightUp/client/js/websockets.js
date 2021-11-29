@@ -7,7 +7,7 @@ var websocketGame = {
     // the starting point of next line drawing.
     startX : 0,
     startY : 0,
-}
+};
 
 // canvas context
 var canvas = document.getElementById('drawing-pad');
