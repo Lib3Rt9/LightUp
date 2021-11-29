@@ -15,15 +15,17 @@ function Room() {
     // manages the adding and removing of users
     Room.prototype.addUser = function(user){
         this.users.push(user);
+        
         var room = this;
         
-        this.handleOnUserMessage(user);
+        
         // handle user closing
         user.socket.onclose = function(){
             console.log('A connection left.');
             room.removeUser(user);
         }
-
+        
+        this.handleOnUserMessage(user);
     };
 
     Room.prototype.removeUser = function(user) {
@@ -45,12 +47,14 @@ function Room() {
     // handles user messages
     Room.prototype.handleOnUserMessage = function(user) {
         var room = this;
+
         user.socket.on("message", function(message){
-            console.log("Receive message from " + user.id + ": " + message);
+            console.log("Receive message from " + user.id + ": " + message); 
+            // send to all users in room.
+            var msg = "User " + user.id + " said: " + message;
+            room.sendAll(msg);
         });
-        socket.on("message", function(message){
-            console.log("Receive message: " + message);
-        });
+        
     };
 };
 
