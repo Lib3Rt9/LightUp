@@ -1,3 +1,4 @@
+// references from many sources
 $(document).ready(function(){
     
     // the logic of drawing in the Canvas
@@ -7,37 +8,39 @@ $(document).ready(function(){
         var mouseX = e.originalEvent.layerX || e.offsetX || 0;
         var mouseY = e.originalEvent.layerY || e.offsetY || 0;
         
-        websocketGame.startX = mouseX;
-        websocketGame.startY = mouseY;
-        websocketGame.isDrawing = true;
+        wsGame.startX = mouseX;
+        wsGame.startY = mouseY;
+        wsGame.isDrawing = true;
    
     });
 
-   $("#drawing-pad").mousemove(function(e) {
+    // 
+    $("#drawing-pad").mousemove(function(e) {
     
         // draw lines when is drawing
-        if (websocketGame.isDrawing) {
+        if (wsGame.isDrawing) {
             
             // get the mouse x and y 
             // relative to the canvas top-left point.
             var mouseX = e.originalEvent.layerX || e.offsetX || 0;
             var mouseY = e.originalEvent.layerY || e.offsetY || 0;
             
-            if (!(mouseX === websocketGame.startX && mouseY === websocketGame.startY)) {
-                drawLine(ctx, websocketGame.startX, 
-                websocketGame.startY,mouseX,mouseY,1);
-                websocketGame.startX = mouseX;
-                websocketGame.startY = mouseY;
+            if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
+                drawLine(ctx, wsGame.startX, 
+                wsGame.startY,mouseX,mouseY,1);
+                wsGame.startX = mouseX;
+                wsGame.startY = mouseY;
             }
         }
     });
 
     $("#drawing-pad").mouseup(function(e) {
-        websocketGame.isDrawing = false;
+        wsGame.isDrawing = false;
     });
    
 });
 
+// draw the lines, appearance
 function drawLine(ctx, x1, y1, x2, y2, thickness) {
     ctx.beginPath();
     ctx.moveTo(x1,y1);

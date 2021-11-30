@@ -20,7 +20,7 @@ function Room() {
         
         // handle user closing
         user.socket.onclose = function(){
-            console.log('A connection left.');
+            console.log("A connection left.");
             room.removeUser(user);
         }
 

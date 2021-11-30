@@ -1,23 +1,24 @@
-// create a new simple server
-// use 8000 as server port number
-var port = 8000;
+// create a simple server
+var port = 8000; // use 8000 as server port number
 
-// Server code
+// Server code --------------------------------------------------------------
 // use 'require' to load a function in a specific module
-var WebSocketServer = require('ws').Server;
-var server = new WebSocketServer({ port: port });
+var wsServer = require("ws").Server;
+var server = new wsServer({ port: port });
 
 // node.js server is event based
 // listens to the connection event and handles it
 
-// sends the user count to all the connected users
-// import User and Room
-var User = require('./game').User;
-var Room = require('./game').Room;
-var room1 = new Room();
+// send the user count to all connected users
+var User = require("./game").User; // import User
+var Room = require("./game").Room; // import Room
 
-server.on('connection', function(socket) {
+var room1 = new Room(); // create a new meeting room
+
+server.on("connection", function(socket) {
+
     var user = new User(socket);
+
     room1.addUser(user);
     console.log("A connection established");
 
@@ -28,5 +29,6 @@ server.on('connection', function(socket) {
 });
 
 
+// a notification to ensure that server is running
 console.log("WebSocket server is running.");
 console.log("Listening to port " + port + ".");

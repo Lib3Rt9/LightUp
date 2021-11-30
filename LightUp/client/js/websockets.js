@@ -1,5 +1,5 @@
 // drawing logic
-var websocketGame = {
+var wsGame = {
     
     // indicates if it is drawing now.
     isDrawing : false,
@@ -10,8 +10,8 @@ var websocketGame = {
 };
 
 // canvas context
-var canvas = document.getElementById('drawing-pad');
-var ctx = canvas.getContext('2d');
+var canvas = document.getElementById("drawing-pad");
+var ctx = canvas.getContext("2d"); // context
 
 // -----------------------------------------------------------------------
 // init script when the DOM is ready.
@@ -19,22 +19,22 @@ $(function(){
     // check if existence of WebSockets in browser
     if (window["WebSocket"]) {
 
-        // create connection
-        websocketGame.socket = new WebSocket("ws://127.0.0.1:8000");
+        // create connection with url of node server
+        wsGame.socket = new WebSocket("ws://127.0.0.1:8000");
 
         // on open event
-        websocketGame.socket.onopen = function(e) {
+        wsGame.socket.onopen = function(e) {
             console.log("WebSocket connection established.");
         };
 
         // on close event
-        websocketGame.socket.onclose = function(e) {
+        wsGame.socket.onclose = function(e) {
             console.log("WebSocket connection closed.");
         };
 
         // add handler - print out messages received from server
         // on message event - listen to the server message
-        websocketGame.socket.onmessage = function(e) {
+        wsGame.socket.onmessage = function(e) {
             $("#chat-history").append("<li>"+e.data+"</li>");
             // console.log(e.data);
         };
@@ -54,7 +54,9 @@ $("#chat-input").keypress(function(event) {
 
 function sendMessage() {
     console.log("clicked");
+
     var message = $("#chat-input").val();
-    websocketGame.socket.send(message);
+    wsGame.socket.send(message);
+    
     $("#chat-input").val("");
 }
