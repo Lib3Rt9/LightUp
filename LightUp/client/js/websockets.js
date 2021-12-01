@@ -1,5 +1,8 @@
 // drawing logic
 var wsGame = {
+    // Constants
+    LINE_SEGMENT : 0,
+    CHAT_MESSAGE : 1,
     
     // indicates if it is drawing now.
     isDrawing : false,
@@ -7,7 +10,7 @@ var wsGame = {
     // the starting point of next line drawing.
     startX : 0,
     startY : 0,
-};
+}
 
 // canvas context
 var canvas = document.getElementById("drawing-pad");
@@ -35,8 +38,21 @@ $(function(){
         // add handler - print out messages received from server
         // on message event - listen to the server message
         wsGame.socket.onmessage = function(e) {
-            $("#chat-history").append("<li>"+e.data+"</li>");
+            // $("#chat-history").append("<li>"+e.data+"</li>");
             // console.log(e.data);
+
+            // check if the received data is chat or line segment
+            console.log("onmessage event:", e.data);
+            var data = JSON.parse(e.data);
+
+            // check if the message is chat
+            if (data.dataType === wsGame.CHAT_MESSAGE) {
+                $("#chat-history").append("<li>" + data.sender + " said: "+ data.message + "</li>");
+            }
+            // check if the message is line segment
+            else if (data.dataType === wsGame.LINE_SEGMENT) {
+                drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
+            }
         };
     }
 });
@@ -56,7 +72,13 @@ function sendMessage() {
     console.log("clicked");
 
     var message = $("#chat-input").val();
-    wsGame.socket.send(message);
-    
+
+    // pack the message into an object
+    var data = {};
+    data.dataType = wsGame.CHAT_MESSAGE;
+    data.message = message;
+
+    wsGame.socket.send(JSON.stringify(data));
     $("#chat-input").val("");
+    
 }

@@ -23,8 +23,8 @@ server.on("connection", function(socket) {
     console.log("A connection established");
 
     // sends a server message to all connected clients
-    var message = "Welcome " + user.id + " joining the party. Total connection: " + room1.users.length;
-    room1.sendAll(message);
+    // var message = "Welcome " + user.id + " joining the party. Total connection: " + room1.users.length;
+    // room1.sendAll(message);
 
 });
 
