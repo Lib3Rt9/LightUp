@@ -17,7 +17,8 @@ $(document).ready(function(){
 
     // when drawing with the mouse
     $("#drawing-pad").mousemove(function(e) {
-    
+        // draw and send to server
+
         // draw lines when is drawing
         if (wsGame.isDrawing) {
             

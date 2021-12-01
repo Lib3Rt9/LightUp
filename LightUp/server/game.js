@@ -1,5 +1,5 @@
 // server logic
-// constants
+// constants to compare datatypes
 var LINE_SEGMENT = 0;
 var CHAT_MESSAGE = 1;
 
@@ -24,6 +24,7 @@ function Room() {
         this.users.push(user);
         var room = this;
         
+        // now handle messages from game.js, not server.js anymore
         // tell others that someone joins the room
         var data = {
             dataType: CHAT_MESSAGE,
@@ -66,8 +67,9 @@ function Room() {
         user.socket.on("message", function(message){
             console.log("Receive message from " + user.id + ": " + message); 
             
+            // use JSON-formatted string for communicating both drawing actions and chat messages
             // construct the message
-            var data = JSON.parse(message);
+            var data = JSON.parse(message); //  parse to JavaScript object
             if (data.dataType === CHAT_MESSAGE) {
                 // add the sender information into the message data object.
                 data.sender = user.id;
@@ -76,9 +78,6 @@ function Room() {
             // send to all clients in room.
             room.sendAll(JSON.stringify(data));
 
-            // send message to all clients in room.
-            // var msg = "User " + user.id + " said: " + message;
-            // room.sendAll(msg);
         });
         
     };
