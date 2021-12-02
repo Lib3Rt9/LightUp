@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="game.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Light Up</title>
 </head>
 <body>
@@ -106,19 +107,68 @@
       </div>
       
       <div class="drawbox">
-        <!-- What's up -->
+        <div class="chalkboard">
+          <i class="fas fa-chalkboard">Draw Canvas</i>
+        </div>
+        <canvas></canvas>
       </div>
       
       <div class="rounds">
-        <!-- Morning -->
+        <div class="rounds">
+          <i class="fas fa-arrow-circle-right">Round 2 of 3</i>
+        </div>
+      </div>
+
       </div>
       
       <div class="toolbox">
-        <!-- Afternoon -->
+        <div class="colorpalet-box">
+
+          <div class="antwoord">
+            <input type="text" class="inputfield" placeholder="Type your answer here">
+          </div>
+  
+          <div class="colorpalet">
+            <table>
+              <tr>
+                <td><button class="wit"></button></td>
+                <td><button class="geel"></button></td>
+                <td><button class="orange"></button></td>
+                <td><button class="rood"></button></td>
+                <td><button class="rose"></button></td>
+                <td><button class="groen"></button></td>
+                <td><button class="lichtblauw"></button></td>
+                <td><button class="blauw"></button></td>
+                <td><button class="donkerblauw"></button></td>
+                <td><button class="purper"></button></td>
+                <td><button class="bruin"></button></td>
+                <td><button class="zwart"></button></td>
+                <td><button class="lichtgrijs"></button></td>
+                <td><button class="donkergrijs"></button></td>
+              </tr>
+            </table>
+          </div>
+  
+          <div class="tools">
+            <table>
+              <tr>
+                <td><button class="potlood d-flex justify-content-center"><i class="fas fa-pencil-alt"></i></button></td>
+                <td><button class="borstel d-flex justify-content-center"><i class="fas fa-paint-brush"></i></button></td>
+                <td><button class="marker d-flex justify-content-center"><i class="fas fa-highlighter"></i></button></td>
+                <td><button class="stylo d-flex justify-content-center"><i class="fas fa-pen-alt"></i></button></td>
+                <td><button class="eraser d-flex justify-content-center"><i class="fas fa-eraser"></i></button></td>
+                <td><button class="trash d-flex justify-content-center"><i class="fas fa-trash-alt"></i></button></td>
+              </tr>
+            </table>
+          </div>
+  
+        </div>
       </div>
       
       <div class="timer">
-        <!-- Evening -->
+        <div class="title">
+          <i class="fas fa-clock">1 min.</i>
+        </div>
       </div>
     
     </div>
