@@ -2,6 +2,14 @@
 // constants to compare datatypes
 var LINE_SEGMENT = 0;
 var CHAT_MESSAGE = 1;
+var GAME_LOGIC = 2;
+
+// Constant for game logic state
+var WAITING_TO_START = 0;
+var GAME_START = 1;
+var GAME_OVER = 2;
+var GAME_RESTART = 3; 
+
 
 // store game and logic, manage all connected sockets
 // store socket connection objects and create random ID

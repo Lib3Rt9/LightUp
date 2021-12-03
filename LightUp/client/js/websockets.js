@@ -71,7 +71,24 @@ $(function(){
                     
                     $("#restart").show();
                 }
-                
+                if (data.gameState === wsGame.GAME_START) {
+                    // clear the canvas drawing pad
+                    canvas.width = canvas.width;
+
+                    // hide restart button
+                    $("#restart").hide();
+                    
+                    $("#chat-history").html("");
+
+                    if (data.isDrawerTurn) {
+                        ws.isTurnToDraw = true;
+
+                        $("#chat-history").append("<li>Your turn to draw! The word is: " + data.theWord + ".</li>");
+                    }
+                    else {
+                        $("#chat-history").append("<li>Let's start! Get ready!\n" + "60 seconds left!</li>");
+                    }
+                }
             }
         };
     }
@@ -103,3 +120,19 @@ function sendMessage() {
     $("#chat-input").val("");
     
 }
+
+// restart button
+$("#restart").hide();
+$("#restart").click(function(){
+ canvas.width = canvas.width;
+ $("#chat-history").html("");
+ $("#chat-history").append("<li>Restarting Game.</li>");
+ 
+ // pack the restart message into an object.
+ var data = {};
+ data.dataType = wsGame.GAME_LOGIC;
+ data.gameState = wsGame.GAME_RESTART;
+ wsGame.socket.send(JSON.stringify(data));
+ 
+ $("#restart").hide();
+});

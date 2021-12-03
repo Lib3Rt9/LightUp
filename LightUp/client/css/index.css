@@ -1,5 +1,336 @@
-canvas {
+/* canvas {
     background: white;
     border: 1px solid;
     position: relative;
-}
+} */
+:root {
+    --background: #3d5788;
+    --heading: #f0f8ff;
+    --text: #174252;
+    --text2: #259ac5;
+    --bg1: #a4cde7;
+    }
+  
+    body {
+        font-family: "Roboto Condensed", sans-serif;
+        font-weight: 400;
+        background-color: var(--background); 
+    }
+  
+    #navbar {
+        max-width: auto;
+        height: 50px;
+        padding: 0 10px;
+        border: 1px solid white;
+        background-color: var(--bg1);
+        position: sticky;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    #navbar h1 {
+        position: relative;
+        color: var(--text2);
+        text-align: center;
+    }
+    
+    #navbar .login-box #btn-login {
+        color: white;
+        padding: 6px 24px;
+        border: 1px solid white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    #navbar .login-box:active {
+        position: relative;
+        top: 2px;
+    }
+    
+    #navbar .login-box {
+        width: 96px;
+        height: 33px;
+        padding-top: 7px;
+    }
+    
+    #navbar .login-box #btn-login {
+        background-color: #2b98c0;
+    }
+    
+    #navbar .login-box #btn-login:hover {
+        background-color: linear-gradient(to bottom, #259ac5 5%, #092e3b 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#259ac5 ", endColorstr="#092e3b",GradientType=0);
+        background-color: #092e3b;
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    .span-2 {
+        grid-row: span 2;
+    }
+    
+    .structure {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: 1fr 5fr 1fr;
+        margin-top: 1em;
+    }
+    
+    .drawbox, .chatbox, .rounds, .toolbox, .timer {
+        background-color: white;
+    }
+    
+    .player {
+        background-color: var(--bg1);
+    }
+    
+    .playerslist-box {
+        width: auto;
+        height: auto;
+        display: flex;
+    }
+    .playerslist-box #panel-heading {
+        border-radius: 8px;
+        color: var(--text);
+    }
+    .playerslist-box #panel-heading .title {
+        border-radius: 8px;
+        text-align: center;
+    }
+    .playerslist-box #panel-heading .title span {
+        padding-left: 5px;
+        font-weight: 500;
+        font-size: 30px;
+    }
+    .playerslist-box #panel-body {
+        border-radius: 8px;
+        color: var(--text);
+        display: flex;
+    }
+    .playerslist-box th {
+        width: 400px;
+        height: 50px;
+        color: var(--text);
+        padding: 5px;
+        font-size: 20px;
+        align-content: center;
+    }
+    .playerslist-box td {
+        text-align: center;
+    }
+    .playerslist-box td img {
+        width: 50px;
+        height: 75px;
+        padding-top: 5px;
+    }
+    
+    .wordbox {
+        display: flex;
+        justify-content: center;
+        justify-self: center;
+    }
+    .wordbox #jumbotron {
+        width: 600px;
+        height: 120px;
+        background-color: #092e3b;
+        border: 1px solid #adc5ce;
+        border-radius: 8px;
+        color: #2b98c0;
+        justify-self: center;
+        text-align: center;
+    }
+    .wordbox #jumbotron span {
+        padding-left: 5px;
+        font-weight: 500;
+        font-size: 30px;
+    }
+    
+    .panel-heading {
+        width: 600px;
+        height: 50px;
+        background-color: #092e3b;
+        border: 1px solid #adc5ce;
+        border-radius: 8px;
+        color: #2b98c0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .panel-heading .title {
+        text-align: center;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .panel-heading .chalkboard {
+        text-align: center;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .panel-heading .rounds {
+        text-align: right;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    canvas {
+        background: white;
+        border: 1px solid;
+        border-radius: 8px;
+        position: relative;
+    }
+    .colorpalet-box {
+        width: 600px;
+        height: 100px;
+        padding: 3px;
+        background-color: #092e3b;
+        border: 1px solid #adc5ce;
+        border-radius: 8px;
+        color: #2b98c0;
+        display: flex;
+        flex-direction: column;
+    }
+    .colorpalet-box .antwoord {
+        width: 600px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+    }
+    .colorpalet-box .antwoord input {
+        width: 95%;
+        margin: 3px;
+        border: 1px solid #adc5ce;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .colorpalet-box .colorpalet {
+        display: flex;
+        justify-content: center;
+    }
+    .colorpalet-box .colorpalet .wit {
+        background-color: white;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .geel {
+        background-color: yellow;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .orange {
+        background-color: orangered;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .rood {
+        background-color: red;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .rose {
+        background-color: #ce4281;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .groen {
+        background-color: green;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .lichtblauw {
+        background-color: #36b1c4;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .blauw {
+        background-color: #1f5eca;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .donkerblauw {
+        background-color: #05054b;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .purper {
+        background-color: #7b16c9;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .bruin {
+        background-color: #5e260c;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .zwart {
+        background-color: #050805;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .lichtgrijs {
+        background-color: #bfc9ca;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .colorpalet .donkergrijs {
+        background-color: #4c4d4e;
+        width: 30px;
+        height: 20px;
+    }
+    .colorpalet-box .tools {
+        display: flex;
+        justify-content: center;
+    }
+    .colorpalet-box .tools .potlood {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    .colorpalet-box .tools .borstel {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    .colorpalet-box .tools .marker {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    .colorpalet-box .tools .stylo {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    .colorpalet-box .tools .eraser {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    .colorpalet-box .tools .trash {
+        background-color: #d9e3ec;
+        width: 30px;
+        height: 25px;
+    }
+    
+    .drawbox {
+    
+    }
+    
+    .chatbox {
+    
+    }
+    
+    .rounds {
+    
+    }
+    
+    .toolbox {
+    
+    }
+    
+    .timer {
+    
+    }

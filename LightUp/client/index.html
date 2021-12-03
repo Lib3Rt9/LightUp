@@ -5,6 +5,10 @@
         <meta charset="utf-8">
         <title>LightUp</title>
         <link rel="stylesheet" href="css/index.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="game.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
 
     <body>
@@ -21,15 +25,196 @@
         <input type="button" value="Restart" id="restart">
         
 
-        <!-- drawing pad goes here -->
-        <canvas id='drawing-pad' width='500' height='400'>
+        <!-- drawing pad goes here --> <!-- comment -->
+        <!-- <canvas id='drawing-pad' width='500' height='400'>
             DRAW EVERYTHING HERE
         </canvas>
         <script src="js/websockets.js"></script>
-        <script src="js/drawing.js"></script>
+        <script src="js/drawing.js"></script> -->
 
-        <!-- see all messages -->
-        <ul id="chat-history"></ul>
+        <!-- see all messages --> <!-- comment -->
+        <!-- <ul id="chat-history"></ul> -->
 
+
+        <div id="navbar">
+            <h1>Light Up</h1>
+            <div class="login-box">
+                <button id="btn-login">Login</button>
+            </div>
+        </div>
+        
+        <div id="main-content">
+            <div class="structure">
+              
+                <div class="player span-2">
+                    <div class="playerslist-box">
+                        <div id="panel-heading">
+                            <div class="title">
+                                <i class="fas fa-user-ninja fa-2x"></i>
+                                <span>Players</span>
+                            </div>
+                
+                            <div id="panel-body">
+                                <table style="width:100%">
+                                    <tr>
+                                    <th>Avatar</th>
+                                    <th>Nickname</th>
+                                    <th>Points</th>
+                                    </tr>
+                                    
+                                    <tr>
+                                    <td>
+                                        <img src="-" alt="avatar Quan"></td>
+                                    <td>
+                                        <h5>Quan</h5>
+                                    </td>
+                                    <td>
+                                        <h6>111 pt</h6>
+                                    </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                    <td>
+                                        <img src="-" alt="avatar Phuc"></td>
+                                    <td>
+                                        <h5>Phuc</h5>
+                                    </td>
+                                    <td>
+                                        <h6>111 pt</h6>
+                                    </td>
+                                    </tr>
+                                    
+                                    <tr>  
+                                    <td>
+                                        <img src="-" alt="avatar Linh"></td>
+                                    <td>
+                                        <h5>Linh</h5>
+                                    </td>
+                                    <td>
+                                        <h6>111 pt</h6>
+                                    </td>
+                                    </tr>
+                                    
+                                    <tr>  
+                                    <td>
+                                        <img src="-" alt="avatar Minh"></td>
+                                    <td>
+                                        <h5>Minh</h5>
+                                    </td>
+                                    <td>
+                                        <h6>111 pt</h6>
+                                    </td>
+                                    </tr>
+                                    
+                                    <tr>  
+                                    <td>
+                                        <img src="-" alt="avatar Thang"></td>
+                                    <td>
+                                        <h5>Thang</h5>
+                                    </td>
+                                    <td>
+                                        <h6>111 pt</h6>
+                                    </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="wordbox">
+                    <div id="jumbotron">
+                        <h5 class="draw text-center mt-3"><span>Draw example or word</span></h5>
+                        <p class="voorbeeld text-center"><span> - - - - - - - - </span></p>
+                    </div>
+                </div>
+              
+                <div class="chatbox span-2">
+                    <!-- How chu doin -->
+
+                    <!-- see all messages -->
+                    <ul id="chat-history"></ul>
+                </div>
+              
+                <div class="drawbox">
+                    <div class="chalkboard">
+                        <i class="fas fa-chalkboard">Draw Canvas</i>
+                    </div>
+                    
+
+                    <!-- drawing pad goes here -->
+                    <canvas id="drawing-pad" width="845px" height="600px">
+                        DRAW EVERYTHING HERE
+                    </canvas>
+                    <script src="js/websockets.js"></script>
+                    <script src="js/drawing.js"></script>
+
+                    <!-- see all messages -->
+                    <!-- <ul id="chat-history"></ul> -->
+
+
+                </div>
+              
+                <div class="rounds">
+                    <div class="rounds">
+                    <i class="fas fa-arrow-circle-right">Round 2 of 3</i>
+                    </div>
+                </div>
+        
+                
+              
+                <div class="toolbox">
+                    <div class="colorpalet-box">
+        
+                    <div class="antwoord">
+                        <input type="text" class="inputfield" placeholder="Type your answer here">
+                    </div>
+          
+                    <div class="colorpalet">
+                        <table>
+                        <tr>
+                            <td><button class="wit"></button></td>
+                            <td><button class="geel"></button></td>
+                            <td><button class="orange"></button></td>
+                            <td><button class="rood"></button></td>
+                            <td><button class="rose"></button></td>
+                            <td><button class="groen"></button></td>
+                            <td><button class="lichtblauw"></button></td>
+                            <td><button class="blauw"></button></td>
+                            <td><button class="donkerblauw"></button></td>
+                            <td><button class="purper"></button></td>
+                            <td><button class="bruin"></button></td>
+                            <td><button class="zwart"></button></td>
+                            <td><button class="lichtgrijs"></button></td>
+                            <td><button class="donkergrijs"></button></td>
+                        </tr>
+                        </table>
+                    </div>
+          
+                    <div class="tools">
+                        <table>
+                        <tr>
+                            <td><button class="potlood d-flex justify-content-center"><i class="fas fa-pencil-alt"></i></button></td>
+                            <td><button class="borstel d-flex justify-content-center"><i class="fas fa-paint-brush"></i></button></td>
+                            <td><button class="marker d-flex justify-content-center"><i class="fas fa-highlighter"></i></button></td>
+                            <td><button class="stylo d-flex justify-content-center"><i class="fas fa-pen-alt"></i></button></td>
+                            <td><button class="eraser d-flex justify-content-center"><i class="fas fa-eraser"></i></button></td>
+                            <td><button class="trash d-flex justify-content-center"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        </table>
+                    </div>
+          
+                    </div>
+                    </div>
+              
+                    <div class="timer">
+                        <div class="title">
+                        <i class="fas fa-clock">1 min.</i>
+                        </div>
+                    </div>
+            
+                </div>
+        </div>
+        
     </body>
 </html>
