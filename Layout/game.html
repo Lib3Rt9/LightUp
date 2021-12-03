@@ -5,15 +5,169 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="game.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Light Up</title>
 </head>
 <body>
+  <div id="navbar">
+    <h1>Light Up</h1>
+    <div class="login-box">
+      <button id="btn-login">Login</button>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <div class="structure">
+      
+      <div class="player span-2">
+        <div class="playerslist-box">
+          <div id="panel-heading">
+            <div class="title">
+              <i class="fas fa-user-ninja fa-2x"></i>
+              <span>Players</span>
+            </div>
+    
+            <div id="panel-body">
+              <table style="width:100%">
+                <tr>
+                  <th>Avatar</th>
+                  <th>Nickname</th>
+                  <th>Points</th>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <img src="-" alt="avatar Quan"></td>
+                  <td>
+                    <h5>Quan</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <img src="-" alt="avatar Phuc"></td>
+                  <td>
+                    <h5>Phuc</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Linh"></td>
+                  <td>
+                    <h5>Linh</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Minh"></td>
+                  <td>
+                    <h5>Minh</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Thang"></td>
+                  <td>
+                    <h5>Thang</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="wordbox">
+        <div id="jumbotron">
+          <h5><span>Draw example or word</span></h5>
+          <p><span> - - - - - - - - </span></p>
+        </div>
+      </div>
+      
+      <div class="chatbox span-2">
+        <!-- How chu doin -->
+      </div>
+      
+      <div class="drawbox">
+        <canvas></canvas>
+      </div>
+      
+      <div class="rounds">
+        <div class="rounds">
+          <i class="fas fa-arrow-circle-right">Round 2 of 3</i>
+        </div>
+      </div>
+
+      </div>
+      
+      <div class="toolbox">
+        <div class="colorpalet-box">
+
+          <div class="answer">
+            <input type="text" class="inputfield" placeholder="Type your answer here">
+          </div>
   
-  <h1>Light Up</h1>
-
-  <div id="main-contain">
-    <div>
-
+          <div class="colorpalet">
+            <table>
+              <tr>
+                <td><button class="white" alt="white"></button></td>
+                <td><button class="yellow" alt="yellow"></button></td>
+                <td><button class="orange" alt="orange"></button></td>
+                <td><button class="red" alt="red"></button></td>
+                <td><button class="rose" alt="pink"></button></td>
+                <td><button class="green" alt="green"></button></td>
+                <td><button class="lightblue" alt="lightblue"></button></td>
+                <td><button class="blue" alt="blue"></button></td>
+                <td><button class="darkblue" alt="darkblue"></button></td>
+                <td><button class="purple" alt="purple"></button></td>
+                <td><button class="brown" alt="brown"></button></td>
+                <td><button class="black" alt="black"></button></td>
+                <td><button class="lightgray" alt="lightgray"></button></td>
+                <td><button class="darkgray" alt="darkgray"></button></td>
+              </tr>
+            </table>
+          </div>
+  
+          <div class="tools">
+            <table>
+              <tr>
+                <td><button class="pencil d-flex justify-content-center"><i class="fas fa-pencil-alt"></i></button></td>
+                <td><button class="brush d-flex justify-content-center"><i class="fas fa-paint-brush"></i></button></td>
+                <td><button class="highlighter d-flex justify-content-center"><i class="fas fa-highlighter"></i></button></td>
+                <td><button class="pen d-flex justify-content-center"><i class="fas fa-pen-alt"></i></button></td>
+                <td><button class="eraser d-flex justify-content-center"><i class="fas fa-eraser"></i></button></td>
+                <td><button class="trash d-flex justify-content-center"><i class="fas fa-trash-alt"></i></button></td>
+              </tr>
+            </table>
+          </div>
+  
+        </div>
+      </div>
+      
+      <div class="timer">
+        <div class="title">
+          <i class="fas fa-clock">1 min.</i>
+        </div>
+      </div>
+    
     </div>
   </div>
 
