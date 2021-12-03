@@ -132,10 +132,10 @@ body {
 .wordbox #jumbotron {
   width: 600px;
   height: 120px;
-  background-color: #092e3b;
+  background-color: white;
   border: 1px solid #adc5ce;
   border-radius: 8px;
-  color: #2b98c0;
+  color: var(--text);
   justify-self: center;
   text-align: center;
 }
@@ -145,42 +145,19 @@ body {
   font-size: 30px;
 }
 
-.panel-heading {
-  width: 600px;
-  height: 50px;
-  background-color: #092e3b;
-  border: 1px solid #adc5ce;
-  border-radius: 8px;
-  color: #2b98c0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.panel-heading .title {
-  text-align: center;
-  font-weight: 500;
-  font-size: 20px;
-}
-.panel-heading .chalkboard {
-  text-align: center;
-  font-weight: 500;
-  font-size: 20px;
-}
-.panel-heading .rounds {
-  text-align: right;
-  font-weight: 500;
-  font-size: 20px;
-}
 canvas {
-  width: 580px;
-  height: 480px;
-  background-color: white;
-  border: 1px solid #adc5ce;
+  width: 100%;
+  height: 100%;
+  background-color: none;
   border-radius: 8px;
+}
+.toolbox {
+  position: relative;
+  display: flex;
 }
 .colorpalet-box {
-  width: 600px;
-  height: 100px;
+  /* width: 100%;
+  height: 100%; */
   padding: 3px;
   background-color: #092e3b;
   border: 1px solid #adc5ce;
@@ -189,13 +166,13 @@ canvas {
   display: flex;
   flex-direction: column;
 }
-.colorpalet-box .antwoord {
-  width: 600px;
-  height: 40px;
+.colorpalet-box .answer {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
-.colorpalet-box .antwoord input {
+.colorpalet-box .answer input {
   width: 95%;
   margin: 3px;
   border: 1px solid #adc5ce;
@@ -206,12 +183,12 @@ canvas {
   display: flex;
   justify-content: center;
 }
-.colorpalet-box .colorpalet .wit {
+.colorpalet-box .colorpalet .white {
   background-color: white;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .geel {
+.colorpalet-box .colorpalet .yellow {
   background-color: yellow;
   width: 30px;
   height: 20px;
@@ -221,7 +198,7 @@ canvas {
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .rood {
+.colorpalet-box .colorpalet .red {
   background-color: red;
   width: 30px;
   height: 20px;
@@ -231,47 +208,47 @@ canvas {
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .groen {
+.colorpalet-box .colorpalet .green {
   background-color: green;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .lichtblauw {
+.colorpalet-box .colorpalet .lightblue {
   background-color: #36b1c4;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .blauw {
+.colorpalet-box .colorpalet .blue {
   background-color: #1f5eca;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .donkerblauw {
+.colorpalet-box .colorpalet .darkblue {
   background-color: #05054b;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .purper {
+.colorpalet-box .colorpalet .purple {
   background-color: #7b16c9;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .bruin {
+.colorpalet-box .colorpalet .brown {
   background-color: #5e260c;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .zwart {
+.colorpalet-box .colorpalet .black {
   background-color: #050805;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .lichtgrijs {
+.colorpalet-box .colorpalet .lightgray {
   background-color: #bfc9ca;
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .donkergrijs {
+.colorpalet-box .colorpalet .darkgray {
   background-color: #4c4d4e;
   width: 30px;
   height: 20px;
@@ -280,22 +257,22 @@ canvas {
   display: flex;
   justify-content: center;
 }
-.colorpalet-box .tools .potlood {
+.colorpalet-box .tools .pencil {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
 }
-.colorpalet-box .tools .borstel {
+.colorpalet-box .tools .brush {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
 }
-.colorpalet-box .tools .marker {
+.colorpalet-box .tools .highlighter {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
 }
-.colorpalet-box .tools .stylo {
+.colorpalet-box .tools .pen {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
@@ -309,24 +286,4 @@ canvas {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
-}
-
-.drawbox {
-
-}
-
-.chatbox {
-
-}
-
-.rounds {
-
-}
-
-.toolbox {
-
-}
-
-.timer {
-
 }
