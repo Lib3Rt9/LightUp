@@ -12,8 +12,11 @@ var server = new wsServer({ port: port });
 // send the user count to all connected users
 var User = require("./game").User; // import User
 var Room = require("./game").Room; // import Room
+var gameRoom = require("./game").gameRoom; // import gameRoom
 
-var room1 = new Room(); // create a new meeting room
+
+// var room1 = new Room(); // create a new meeting room
+var room1 = new gameRoom(); // create a new room
 
 server.on("connection", function(socket) {
 

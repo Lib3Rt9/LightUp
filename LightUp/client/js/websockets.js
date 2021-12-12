@@ -26,6 +26,8 @@ var wsGame = {
 var canvas = document.getElementById("drawing-pad");
 var ctx = canvas.getContext("2d"); // context
 
+
+//#region 
 // -----------------------------------------------------------------------
 // init script when the DOM is ready.
 $(function(){
@@ -62,39 +64,70 @@ $(function(){
             else if (data.dataType === wsGame.LINE_SEGMENT) {
                 drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
             }
-            // game logic message contains different kind of state
-            else if (data.gameState === wsGame.GAME_START) {
+
+            else if (data.dataType === wsGame.GAME_LOGIC) {
                 if (data.gameState === wsGame.GAME_OVER) {
                     wsGame.isTurnToDraw = false;
-                    
-                    $("#chat-history").append("<li>" + data.winner + " guessed the word!\n The word was: " + data.theWord + "!</li>");
-                    
+                    $("#chat-history").append("<li>" + data.winner + " wins! The answer is '"+data.answer+"'.</li>");
                     $("#restart").show();
                 }
-                if (data.gameState === wsGame.GAME_START) {
-                    // clear the canvas drawing pad
-                    canvas.width = canvas.width;
 
-                    // hide restart button
+                if (data.gameState === wsGame.GAME_START) {
+                    // clear the Canvas.
+                    canvas.width = canvas.width;
+                    
+                    // hide the restart button.
                     $("#restart").hide();
                     
+                    // clear the chat history
                     $("#chat-history").html("");
-
-                    if (data.isDrawerTurn) {
-                        ws.isTurnToDraw = true;
-
-                        $("#chat-history").append("<li>Your turn to draw! The word is: " + data.theWord + ".</li>");
+ 
+                    if (data.isPlayerTurn) {
+                        wsGame.isTurnToDraw = true;
+                        $("#chat-history").append("<li>Your turn to draw. Please draw '" + data.answer + "'.</li>");
                     }
                     else {
-                        $("#chat-history").append("<li>Let's start! Get ready!\n" + "60 seconds left!</li>");
+                        $("#chat-history").append("<li>Game Started. Get Ready. You have one minute to guess.</li>");
                     }
                 }
             }
+        
+            // // game logic message contains different kind of state
+            // else if (data.gameState === wsGame.GAME_START) {
+            //     if (data.gameState === wsGame.GAME_OVER) {
+            //         wsGame.isTurnToDraw : false = false;
+                    
+            //         $("#chat-history").append("<li>" + data.winner + " guessed the word!\n The word was: " + data.answer + "!</li>");
+                    
+            //         $("#restart").show();
+            //     }
+            //     if (data.gameState === wsGame.GAME_START) {
+            //         // clear the canvas drawing pad
+            //         canvas.width = canvas.width;
+
+            //         // hide restart button
+            //         $("#restart").hide();
+                    
+            //         // clear the chat history
+            //         $("#chat-history").html("");
+
+            //         if (data.drawerTurn) {
+            //             ws.isTurnToDraw : false, = true;
+
+            //             $("#chat-history").append("<li>Your turn to draw! The word is: " + data.answer + ".</li>");
+            //         }
+            //         else {
+            //             $("#chat-history").append("<li>Let's start! Get ready!\n" + "60 seconds left!</li>");
+            //         }
+            //     }
+            // }
         };
     }
 });
+//#endregion
 
 
+//#region 
 // -----------------------------------------------------------------------
 // send messages to the server when click 'Send' button
 $("#send").click(sendMessage);
@@ -124,15 +157,18 @@ function sendMessage() {
 // restart button
 $("#restart").hide();
 $("#restart").click(function(){
- canvas.width = canvas.width;
- $("#chat-history").html("");
- $("#chat-history").append("<li>Restarting Game.</li>");
+    
+    canvas.width = canvas.width;
+    $("#chat-history").html("");
+    $("#chat-history").append("<li>Restarting Game.</li>");
  
- // pack the restart message into an object.
- var data = {};
- data.dataType = wsGame.GAME_LOGIC;
- data.gameState = wsGame.GAME_RESTART;
- wsGame.socket.send(JSON.stringify(data));
+    // pack the restart message into an object.
+    var data = {};
+    data.dataType = wsGame.GAME_LOGIC;
+    data.gameState = wsGame.GAME_RESTART;
+    wsGame.socket.send(JSON.stringify(data));
  
- $("#restart").hide();
+    $("#restart").hide();
 });
+
+//#endregion

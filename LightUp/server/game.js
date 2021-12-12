@@ -4,7 +4,7 @@ var LINE_SEGMENT = 0;
 var CHAT_MESSAGE = 1;
 var GAME_LOGIC = 2;
 
-// Constant for game logic state
+// constants for game logic state
 var WAITING_TO_START = 0;
 var GAME_START = 1;
 var GAME_OVER = 2;
@@ -89,9 +89,144 @@ function Room() {
         });
         
     };
-};
 
+    
+};
 
 // define User and Room classes to let other files use them
 module.exports.User = User;
 module.exports.Room = Room;
+
+// inherit Room
+gameRoom.prototype = Room();
+
+// constructor - initialize game logic
+function gameRoom() {
+
+    // current turn
+    this.playerTurn = 0;
+
+    this.wordList = ["one", "two", "three", "four"];
+    this.currentAnswer = undefined;
+
+    this.currentGameState = WAITING_TO_START;
+
+    // send game state to all players
+    var gameLogicData ={
+        dataType: GAME_LOGIC,
+        gameState: WAITING_TO_START
+    };
+
+    this.sendAll(JSON.stringify(gameLogicData));
+
+    
+
+    // keep original room's 'addUser' and add logic of at least 2 people
+    gameRoom.prototype.addUser = function(user) {
+        
+        // keep 'addUser'
+        Room.prototype.addUser.call(this, user);
+        
+        // start the game if there are 2 or more connections
+        if (this.currentGameState === WAITING_TO_START && this.users.length >= 2) {
+            this.startGame();
+        }
+
+        
+    };
+
+    gameRoom.prototype.handleOnUserMessage = function(user) {
+        var room = this;
+        // handle on message
+        user.socket.on('message', function(message){
+        console.log("[gameRoom] Receive message from " + user.id + ": " + message);
+
+        var data = JSON.parse(message);
+        if (data.dataType === CHAT_MESSAGE) {
+            // add the sender information into the message data object.
+            data.sender = user.id;
+        }
+        room.sendAll(JSON.stringify(data));
+
+        // check if the message is guessing right or wrong
+        if (data.dataType === CHAT_MESSAGE) {
+            console.log("Current state: " + room.currentGameState);
+
+            if (room.currentGameState === GAME_START) {
+                console.log("Got message: " + data.message + " (Answer: " + room.currentAnswer + ")");
+            }
+
+            if (room.currentGameState === GAME_START && data.message === room.currentAnswer) {
+                var gameLogicData = {
+                    dataType: GAME_LOGIC,
+                    gameState: GAME_OVER,
+                    winner: user.id,
+                    answer: room.currentAnswer
+                };
+
+                room.sendAll(JSON.stringify(gameLogicData));
+    
+                room.currentGameState = WAITING_TO_START;
+
+                // clear the game over timeout
+                clearTimeout(room.gameOverTimeout);
+            }
+        }
+
+        if (data.dataType === GAME_LOGIC && data.gameState === GAME_RESTART) {
+                room.startGame();
+            }
+        });
+    };
+
+
+};
+
+gameRoom.prototype.startGame = function() {
+    var room = this;
+
+    // pick a player for drawing
+    this.playerTurn = (this.playerTurn + 1) % this.users.length;
+    console.log("Start game with player " + this.playerTurn + "'s turn.");
+
+    // pick an answer
+    var answerIndex = Math.floor(Math.random() * this.wordList.length);
+    this.currentAnswer = this.wordList[answerIndex];
+
+    // LET START GAME
+    var gameLogicDataForAllPlayers = {
+        dataType: GAME_LOGIC,
+        gameState: GAME_START,
+        playerTurn: false
+    };
+    this.sendAll(JSON.stringify(gameLogicDataForAllPlayers));
+
+    // game start with answer to the player in turn.
+    var gameLogicDataForDrawer = {
+        dataType: GAME_LOGIC,
+        gameState: GAME_START,
+        answer: this.currentAnswer,
+        playerTurn: true
+    };
+
+    // the user who draws in this turn.
+    var user = this.users[this.playerTurn];
+    user.socket.send(JSON.stringify(gameLogicDataForDrawer));
+
+    // game over the game after 1 minute.
+    gameOverTimeout = setTimeout(function(){
+        var gameLogicData = {
+            dataType: GAME_LOGIC,
+            gameState: GAME_OVER,
+            winner: "No one",
+            answer: room.currentAnswer
+        };
+        room.sendAll(JSON.stringify(gameLogicData));
+
+        room.currentGameState = WAITING_TO_START;
+    }, 60 * 1000);
+
+    room.currentGameState = GAME_START;
+};
+
+module.exports.gameRoom = gameRoom;
