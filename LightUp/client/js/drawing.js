@@ -5,6 +5,10 @@ $(document).ready(function(){
     // when start clicking the mouse
     $("#drawing-pad").mousedown(function(e) {
         
+        if (!wsGame.isTurnToDraw) {
+            wsGame.isDrawing = false;
+            return;
+        }
         // get the mouse x and y relative to the canvas top-left point.
         var mouseX = e.originalEvent.layerX || e.offsetX || 0;
         var mouseY = e.originalEvent.layerY || e.offsetY || 0;
@@ -17,6 +21,9 @@ $(document).ready(function(){
 
     // when drawing with the mouse
     $("#drawing-pad").mousemove(function(e) {
+        if (!wsGame.isTurnToDraw) {
+            return;
+        }
         // draw and send to server
 
         // draw lines when is drawing
