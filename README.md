@@ -11,3 +11,5 @@ Member:
   5. PHẠM Đức Thắng
 
 See also: https://drive.google.com/drive/folders/1frsxpzfq7KjXeBbLJiJ2s5VTwtGKsrg1?usp=sharing
+
+Link to the game: http://lightup.42web.io/?fbclid=IwAR2XDD4Vw0ZtXhJG9ijXmK61uvpTVwZvWnLINhlHFnkNowwxA76zUM-Htww
