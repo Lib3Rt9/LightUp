@@ -21,7 +21,9 @@ var room1 = new gameRoom(); // create a new room
 server.on("connection", function(socket) {
 
     var user = new User(socket);
-console.log(`room1: ${JSON.stringify(room1)}`)
+    
+    console.log(`room1: ${JSON.stringify(room1)}`)
+    
     room1.addUser(user);
     console.log("A connection established");
 

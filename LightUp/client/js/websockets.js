@@ -25,7 +25,7 @@ var wsGame = {
 // canvas context
 var canvas = document.getElementById("drawing-pad");
 var ctx = canvas.getContext("2d"); // context
-
+var backupCanvas = document.createElement("canvas");
 
 //#region 
 // -----------------------------------------------------------------------
@@ -53,7 +53,7 @@ $(function(){
             // convert the JSON-formatted string back to the data object
 
             // check if the received data is chat or line segment
-            console.log("onmessage event:", e.data);
+            // console.log("onmessage event:", e.data);
             var data = JSON.parse(e.data); //  parse to JavaScript object
 
             // check if the message is chat
@@ -68,7 +68,7 @@ $(function(){
             else if (data.dataType === wsGame.GAME_LOGIC) {
                 if (data.gameState === wsGame.GAME_OVER) {
                     wsGame.isTurnToDraw = false;
-                    $("#chat-history").append("<li>" + data.winner + " wins! The answer is '"+data.answer+"'.</li>");
+                    $("#chat-history").append("<li>" + data.winner + " wins! The answer is '"+ data.answer + "'.</li>");
                     $("#restart").show();
                 }
 
@@ -84,10 +84,16 @@ $(function(){
  
                     if (data.isPlayerTurn) {
                         wsGame.isTurnToDraw = true;
+                        if (wsGame.isTurnToDraw = true) {
+                            $("#chat-input").hide();
+                            $("#send").hide();
+                        }                     
                         $("#chat-history").append("<li>Your turn to draw. Please draw '" + data.answer + "'.</li>");
                     }
                     else {
                         $("#chat-history").append("<li>Game Started. Get Ready. You have one minute to guess.</li>");
+                        $("#chat-input").show();
+                        $("#send").show();
                     }
                 }
             }
@@ -161,13 +167,13 @@ $("#restart").click(function(){
     canvas.width = canvas.width;
     $("#chat-history").html("");
     $("#chat-history").append("<li>Restarting Game.</li>");
- 
+
     // pack the restart message into an object.
     var data = {};
     data.dataType = wsGame.GAME_LOGIC;
     data.gameState = wsGame.GAME_RESTART;
     wsGame.socket.send(JSON.stringify(data));
- 
+
     $("#restart").hide();
 });
 

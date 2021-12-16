@@ -107,7 +107,7 @@ function gameRoom() {
     // current turn
     this.playerTurn = 0;
 
-    this.wordList = ["one", "two", "three", "four"];
+    this.wordList = ["one"];
     this.currentAnswer = undefined;
 
     this.currentGameState = WAITING_TO_START;
@@ -130,6 +130,7 @@ function gameRoom() {
             // start the game if there are 2 or more connections
             if (this.currentGameState === WAITING_TO_START && this.users.length >= 2) {
                 this.startGame();
+                
             }
     };
 
@@ -174,16 +175,41 @@ function gameRoom() {
 
             if (data.dataType === GAME_LOGIC && data.gameState === GAME_RESTART) {
                 room.startGame();
+
+                // var timeLeft = 60;
+                // var downloadTimer = setInterval(function(){
+                //     if(timeLeft <= 0){
+                //         clearInterval(downloadTimer);
+                //         document.getElementById("countdown").innerHTML = "Finished";
+                //     } else {
+                //         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+                //     }
+                //     timeLeft -= 1;
+                // }, 1000);
             
             }
         });
     };
 
     gameRoom.prototype.startGame = function() {
+
         var room = this;
         
+        console.log(this);
+        
+        // var timeLeft = 60;
+        // var downloadTimer = setInterval(function(){
+        //     if(timeLeft <= 0){
+        //         clearInterval(downloadTimer);
+        //         document.getElementById("countdown").innerHTML = "Finished";
+        //     } else {
+        //         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+        //     }
+        //     timeLeft -= 1;
+        // }, 1000);
+
         // pick a player to draw
-        this.playerTurn = (this.playerTurn+1) % this.users.length;
+        this.playerTurn = (this.playerTurn + 1) % this.users.length;
         
         console.log("Start game with player " + this.playerTurn + "'s turn.");
         
@@ -212,21 +238,29 @@ function gameRoom() {
         var user = this.users[this.playerTurn];
         user.socket.send(JSON.stringify(gameLogicDataForDrawer));
         
-    
-        // game over the game after 1 minute.
+
+        // game over after 1 minute.
+        
         gameOverTimeout = setTimeout(function(){
-            var gameLogicData = {
-                dataType: GAME_LOGIC,
-                gameState: GAME_OVER,
-                winner: "No one",
-                answer: room.currentAnswer
-            };
+            if (room.currentGameState != WAITING_TO_START) {
+                var gameLogicData = {
+                    dataType: GAME_LOGIC,
+                    gameState: GAME_OVER,
+                    winner: "No one",
+                    answer: room.currentAnswer
+                };
     
-            room.sendAll(JSON.stringify(gameLogicData));
-    
-            room.currentGameState = WAITING_TO_START;
+                room.sendAll(JSON.stringify(gameLogicData));
+                room.currentGameState = WAITING_TO_START;
+            }
 
         },60*1000);
+        
+
+        console.log("gameOverTimeout");
+
+
+
         room.currentGameState = GAME_START;
     };
 };
