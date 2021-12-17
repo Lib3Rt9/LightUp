@@ -7,19 +7,111 @@
   <link rel="stylesheet" type="text/css" href="game.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Light Up</title>
+  <style>
+    body {
+      background-image: url("/Group Project/Game design/Game design/background arts.png");
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+      background-color: #2874A6;
+    }
+  </style>
 </head>
 <body>
-  <div id="navbar">
+  <!-- <div id="navbar">
     <h1>Light Up</h1>
     <div class="login-box">
       <button id="btn-login">Login</button>
     </div>
-  </div>
+  </div> -->
 
   <div id="main-content">
     <div class="structure">
       
-      <div class="player span-2">
+      <!-- <div class="player">
+        <div class="playerslist-box">
+          <div id="panel-heading">
+            <div class="title">
+              <i class="fas fa-user-ninja fa-2x"></i>
+              <span>Players</span>
+            </div>
+    
+            <div id="panel-body">
+              <table style="width:100%">
+                <tr>
+                  <th>Avatar</th>
+                  <th>Nickname</th>
+                  <th>Points</th>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <img src="-" alt="avatar Quan"></td>
+                  <td>
+                    <h5>Quan</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>
+                    <img src="-" alt="avatar Phuc"></td>
+                  <td>
+                    <h5>Phuc</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Linh"></td>
+                  <td>
+                    <h5>Linh</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Minh"></td>
+                  <td>
+                    <h5>Minh</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+                
+                <tr>  
+                  <td>
+                    <img src="-" alt="avatar Thang"></td>
+                  <td>
+                    <h5>Thang</h5>
+                  </td>
+                  <td>
+                    <h6>111 pt</h6>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      
+      <div class="wordbox span-3">
+        <div id="jumbotron">
+          <h5><span>Draw example or word</span></h5>
+          <p><span> - - - - - - - - </span></p>
+        </div>
+      </div>
+
+      <div class="player">
         <div class="playerslist-box">
           <div id="panel-heading">
             <div class="title">
@@ -94,36 +186,33 @@
           </div>
         </div>
       </div>
-      
-      <div class="wordbox">
-        <div id="jumbotron">
-          <h5><span>Draw example or word</span></h5>
-          <p><span> - - - - - - - - </span></p>
-        </div>
-      </div>
-      
-      <div class="chatbox span-2">
-        <!-- How chu doin -->
-      </div>
-      
+
       <div class="drawbox">
         <canvas></canvas>
       </div>
       
-      <div class="rounds">
-        <div class="rounds">
-          <i class="fas fa-arrow-circle-right">Round 2 of 3</i>
+      <div class="chatbox">
+        <div class="chat">
+          <input type="text" placeholder="Type your guess here">
         </div>
-      </div>
 
+        <table>
+          <tr><td><span class="name">Quan: </span>table</td></tr>
+          <tr><td><span class="name">Linh: </span>fench</td></tr>
+          <tr><td><span class="name">Minh: </span>shape</td></tr>
+        </table>
+      </div>
+      
+      <!-- <div class="drawbox">
+        <canvas></canvas>
+      </div> -->
+      
+      <div class="rounds">
+        <!-- Ello -->
       </div>
       
       <div class="toolbox">
         <div class="colorpalet-box">
-
-          <div class="answer">
-            <input type="text" class="inputfield" placeholder="Type your answer here">
-          </div>
   
           <div class="colorpalet">
             <table>
@@ -163,13 +252,12 @@
       </div>
       
       <div class="timer">
-        <div class="title">
-          <i class="fas fa-clock">1 min.</i>
-        </div>
+        <!-- Ello -->
       </div>
     
     </div>
   </div>
 
+  <script src=""></script>
 </body>
 </html>
