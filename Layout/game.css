@@ -12,7 +12,7 @@ body {
   background-color: var(--background); 
 }
 
-#navbar {
+/* #navbar {
   max-width: auto;
   height: 50px;
   padding: 0 10px;
@@ -59,15 +59,15 @@ body {
 
 * {
   box-sizing: border-box;
-}
+} */
 
-.span-2 {
-  grid-row: span 2;
+.span-3 {
+  grid-column: span 3;
 }
 
 .structure {
   display: grid;
-  gap: 1rem;
+  gap: .25rem;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr 5fr 1fr;
   margin-top: 1em;
@@ -77,9 +77,9 @@ body {
   background-color: white;
 }
 
-.player {
+/* .player {
   background-color: var(--bg1);
-}
+} */
 
 .playerslist-box {
   width: auto;
@@ -87,11 +87,11 @@ body {
   display: flex;
 }
 .playerslist-box #panel-heading {
-  border-radius: 8px;
+  background: var(--heading);
   color: var(--text);
 }
 .playerslist-box #panel-heading .title {
-  border-radius: 8px;
+  margin: 1em 0;
   text-align: center;
 }
 .playerslist-box #panel-heading .title span {
@@ -100,15 +100,16 @@ body {
   font-size: 30px;
 }
 .playerslist-box #panel-body {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   color: var(--text);
   display: flex;
 }
 .playerslist-box th {
+  background: var(--text2);
   width: 400px;
   height: 50px;
   color: var(--text);
-  padding: 5px;
+  /* padding: 5px; */
   font-size: 20px;
   align-content: center;
 }
@@ -119,6 +120,12 @@ body {
   width: 50px;
   height: 75px;
   padding-top: 5px;
+}
+.playerslist-box table tr:nth-child(odd) {
+  background: var(--text2);
+}
+.playerslist-box table tr:hover {
+  background: var(--background);
 }
 
 .wordbox {
@@ -142,23 +149,58 @@ body {
   font-size: 30px;
 }
 
-canvas {
-  width: 1000;
-  height: 1000;
-  background-color: none;
+.chatbox {
+  position: relative;
+  padding: 10px;
+}
+/* .chat {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  bottom: 10px;
+} */
+.chat input {
+  position: relative;
+  width: 90%;
+  height: 40px;
+  border: 1px solid darkgrey;
   border-radius: 8px;
+  padding-left: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.chat input:focus {
+  outline: none;
+  border: var(--bg1);
+  box-shadow: 0 0 10px var(--bg1);
+}
+.chatbox table {
+  margin-top: 10px;
+  width: 100%;
+}
+.chatbox table tr:nth-child(odd) {
+  background: var(--bg1);
+}
+.chatbox table tr:nth-child(even) {
+  background: var(--heading);
+}
+
+.drawbox {
+  width: auto;
+  height: auto;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  background-color: none;
 }
 .toolbox {
   position: relative;
-  display: flex;
 }
 .colorpalet-box {
-  /* width: 100%;
-  height: 100%; */
   padding: 3px;
-  background-color: #092e3b;
-  border: 1px solid #adc5ce;
-  border-radius: 8px;
   color: #2b98c0;
   display: flex;
   flex-direction: column;
