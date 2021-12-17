@@ -25,7 +25,7 @@ var wsGame = {
 // canvas context
 var canvas = document.getElementById("drawing-pad");
 var ctx = canvas.getContext("2d"); // context
-var backupCanvas = document.createElement("canvas");
+// var backupCanvas = document.createElement("canvas");
 
 //#region 
 // -----------------------------------------------------------------------
@@ -63,6 +63,7 @@ $(function(){
             // check if the message is line segment
             else if (data.dataType === wsGame.LINE_SEGMENT) {
                 drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
+                // draw(e);
             }
 
             else if (data.dataType === wsGame.GAME_LOGIC) {
@@ -97,36 +98,6 @@ $(function(){
                     }
                 }
             }
-        
-            // // game logic message contains different kind of state
-            // else if (data.gameState === wsGame.GAME_START) {
-            //     if (data.gameState === wsGame.GAME_OVER) {
-            //         wsGame.isTurnToDraw : false = false;
-                    
-            //         $("#chat-history").append("<li>" + data.winner + " guessed the word!\n The word was: " + data.answer + "!</li>");
-                    
-            //         $("#restart").show();
-            //     }
-            //     if (data.gameState === wsGame.GAME_START) {
-            //         // clear the canvas drawing pad
-            //         canvas.width = canvas.width;
-
-            //         // hide restart button
-            //         $("#restart").hide();
-                    
-            //         // clear the chat history
-            //         $("#chat-history").html("");
-
-            //         if (data.drawerTurn) {
-            //             ws.isTurnToDraw : false, = true;
-
-            //             $("#chat-history").append("<li>Your turn to draw! The word is: " + data.answer + ".</li>");
-            //         }
-            //         else {
-            //             $("#chat-history").append("<li>Let's start! Get ready!\n" + "60 seconds left!</li>");
-            //         }
-            //     }
-            // }
         };
     }
 });

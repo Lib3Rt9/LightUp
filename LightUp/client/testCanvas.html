@@ -1,13 +1,46 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-<html>
+    <link href="css/testCanvas.css" type="text/css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity=""></script>
+    <script src="js/jquery-2.1.3.min.js"></script>
+</head>
 
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<body>
+    
+    <div class="field">
+        <canvas id="drawing-pad"></canvas>
+        
+        <div class="tools">
+            <button onclick="undo_last()" type="button"class="button" type="button">Undo</button>
+            <!-- <button onclick="redo_last()" type="button"class="button" type="button">Redo</button> -->
+            <button onclick="clear_canvas()" class="button" type="button">Clear</button>
 
-        <link rel="stylesheet" href="style.css" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    </head>
+            <div onclick="change_color(this)" class="color-field" style="background: white;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: black;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: red;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: blue;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: green;"></div>
+            <div onclick="change_color(this)" class="color-field" style="background: yellow;"></div>
 
+            <input oninput="draw_color = this.value" type="color" class="color-picker">
+            <input oninput="draw_width = this.value" type="range" min="1" max="100" class="pen-range">
+        </div>
+
+        <!-- input and send message to server --> <!-- comment -->
+        <!-- <input type="text" id="chat-input" autocomplete="off">
+        <input type="button" value="Send" id="send">
+        
+        <input type="button" value="Restart" id="restart">
+
+        <ul id="chat-history"></ul> -->
+    </div>
+</body>
+<script src=js/testCanvas.js></script>
+<script src="js/websockets.js"></script>
 </html>

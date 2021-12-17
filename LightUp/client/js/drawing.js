@@ -34,6 +34,9 @@ $(document).ready(function(){
             // relative to the canvas top-left point.
             var mouseX = e.originalEvent.layerX || e.offsetX || 0;
             var mouseY = e.originalEvent.layerY || e.offsetY || 0;
+
+            console.log(mouseX);
+
             
             if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
                 drawLine(ctx, wsGame.startX, wsGame.startY, mouseX, mouseY, 1);
@@ -60,19 +63,9 @@ $(document).ready(function(){
    
 });
 
-function storeCanvas() {
-    backupCanvas.width = canvas.width;
-    backupCanvas.height = canvas.height;
-    backupCanvas.ctx = backupCanvas.getContext("2d");
-    backupCanvas.ctx.drawImage(canvas, 0, 0);
-}
-
-function restoreCanvas() {
-    ctx.drawImage(backupCanvas, 0, 0);
-}
-
 // draw the lines, given starting and ending points
 function drawLine(ctx, x1, y1, x2, y2, thickness) {
+    // ctx, data.startX, data.startY, data.endX
     ctx.getImageData(0, 0, canvas.width, canvas.height)
     ctx.beginPath();
     ctx.moveTo(x1,y1);
