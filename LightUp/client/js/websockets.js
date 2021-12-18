@@ -27,6 +27,7 @@ var canvas = document.getElementById("drawing-pad");
 var ctx = canvas.getContext("2d"); // context
 // var backupCanvas = document.createElement("canvas");
 
+
 //#region 
 // -----------------------------------------------------------------------
 // init script when the DOM is ready.
@@ -63,7 +64,7 @@ $(function(){
             // check if the message is line segment
             else if (data.dataType === wsGame.LINE_SEGMENT) {
                 drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
-                // draw(e);
+                
             }
 
             else if (data.dataType === wsGame.GAME_LOGIC) {

@@ -6,6 +6,7 @@ canvas.height = 400;
 
 // ctx - 2d ctx
 var ctx = canvas.getContext("2d");
+
 // coloring the drawing pad
 let start_background_color = "white";
 ctx.fillStyle = start_background_color;
@@ -36,32 +37,36 @@ canvas.addEventListener("mouseup", stop, false);
 canvas.addEventListener("mouseout", stop, false);
 
 
+
 // getting the mouse coordinates 
-function start(e) {
+function start(event) {
+
     wsGame.isDrawing = true;
 
-    var mouseX = e.clientX - canvas.offsetLeft;
-    var mouseY = e.clientY - canvas.offsetTop;
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
 
     ctx.beginPath(); // begin new canvas path
     ctx.moveTo(mouseX, mouseY);
 
     // let default changes disappear
-    e.preventDefault();
+    event.preventDefault();
 
     wsGame.startX = mouseX;
     wsGame.startY = mouseY;
+
 }
 
 
 // let's start drawing
 // var mouseX = e.clientX - canvas.offsetLeft;
 // var mouseY = e.clientY - canvas.offsetTop;
-function draw(e) {
+function draw(event) {
+    
     if (wsGame.isDrawing == true) {
 
-        var mouseX = e.clientX - canvas.offsetLeft;
-        var mouseY = e.clientY - canvas.offsetTop;
+        var mouseX = event.clientX - canvas.offsetLeft;
+        var mouseY = event.clientY - canvas.offsetTop;
 
         ctx.lineTo(mouseX, mouseY);
         ctx.strokeStyle = draw_color;
@@ -69,12 +74,8 @@ function draw(e) {
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
-
-        console.log(e.clientX - canvas.offsetLeft);
-
-        // mouseX = e.clientX - canvas.offsetLeft
-        // mouseY = e.clientY - canvas.offsetTop
     
+        
         var data = {};
         data.dataType = wsGame.LINE_SEGMENT;
         data.startX = wsGame.startX;
@@ -85,26 +86,23 @@ function draw(e) {
 
         wsGame.startX = mouseX;
         wsGame.startY = mouseY;
-        
 
-        // wsGame.startX = mouseX;
-        // wsGame.startY = mouseY;
     }
-    e.preventDefault();
+    event.preventDefault();
 }
 
 // stop drawing when mouse is out or being released
-function stop(e) {
+function stop(event) {
     if (wsGame.isDrawing) {
         ctx.stroke();
         ctx.closePath();
         wsGame.isDrawing = false;
     }
     // let default changes disappear
-    e.preventDefault();
+    event.preventDefault();
 
     // stop drawing -> add the path inside array when mouse out
-    if (e.type != "mouseout") {
+    if (event.type != "mouseout") {
         restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
         index += 1;
     }
@@ -113,7 +111,7 @@ function stop(e) {
 }
 
 // clear all the drawing
-function clear_canvas(e) {
+function clear_canvas(event) {
     ctx.fillStyle = start_background_color;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -140,4 +138,3 @@ function undo_last() {
 function redo_last() {
     
 }
-

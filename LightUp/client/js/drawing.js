@@ -71,7 +71,7 @@ function drawLine(ctx, x1, y1, x2, y2, thickness) {
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2);
     ctx.lineWidth = thickness;
-    ctx.strokeStyle = "#500";
+    ctx.strokeStyle = "white";
     ctx.stroke();
 }
 
