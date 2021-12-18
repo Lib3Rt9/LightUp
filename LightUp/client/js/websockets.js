@@ -26,7 +26,13 @@ var wsGame = {
 var canvas = document.getElementById("drawing-pad");
 var ctx = canvas.getContext("2d"); // context
 // var backupCanvas = document.createElement("canvas");
+// var draw_color = "black"; // default color
+canvas.width = window.innerWidth - 60;
+canvas.height = 400;
 
+// function change_color(element) {
+//     draw_color = element.style.background;
+// }
 
 //#region 
 // -----------------------------------------------------------------------
@@ -54,7 +60,7 @@ $(function(){
             // convert the JSON-formatted string back to the data object
 
             // check if the received data is chat or line segment
-            // console.log("onmessage event:", e.data);
+            console.log("onmessage event:", e.data);
             var data = JSON.parse(e.data); //  parse to JavaScript object
 
             // check if the message is chat
@@ -63,7 +69,8 @@ $(function(){
             }
             // check if the message is line segment
             else if (data.dataType === wsGame.LINE_SEGMENT) {
-                drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
+                // drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
+                draw(ctx, data.startX, data.startY, data.endX, data.endY, data.draw_color, data.draw_width);
                 
             }
 

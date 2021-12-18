@@ -6,7 +6,6 @@ canvas.height = 400;
 
 // ctx - 2d ctx
 var ctx = canvas.getContext("2d");
-
 // coloring the drawing pad
 let start_background_color = "white";
 ctx.fillStyle = start_background_color;
@@ -37,14 +36,13 @@ canvas.addEventListener("mouseup", stop, false);
 canvas.addEventListener("mouseout", stop, false);
 
 
-
 // getting the mouse coordinates 
 function start(event) {
 
-    wsGame.isDrawing = true;
-
     var mouseX = event.clientX - canvas.offsetLeft;
     var mouseY = event.clientY - canvas.offsetTop;
+
+    wsGame.isDrawing = true;
 
     ctx.beginPath(); // begin new canvas path
     ctx.moveTo(mouseX, mouseY);
@@ -59,14 +57,12 @@ function start(event) {
 
 
 // let's start drawing
-// var mouseX = e.clientX - canvas.offsetLeft;
-// var mouseY = e.clientY - canvas.offsetTop;
 function draw(event) {
     
-    if (wsGame.isDrawing == true) {
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
 
-        var mouseX = event.clientX - canvas.offsetLeft;
-        var mouseY = event.clientY - canvas.offsetTop;
+    if (wsGame.isDrawing == true) {
 
         ctx.lineTo(mouseX, mouseY);
         ctx.strokeStyle = draw_color;
@@ -74,18 +70,6 @@ function draw(event) {
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
-    
-        
-        var data = {};
-        data.dataType = wsGame.LINE_SEGMENT;
-        data.startX = wsGame.startX;
-        data.startY = wsGame.startY;
-        data.endX = mouseX;
-        data.endY = mouseY;
-        wsGame.socket.send(JSON.stringify(data));
-
-        wsGame.startX = mouseX;
-        wsGame.startY = mouseY;
 
     }
     event.preventDefault();
@@ -138,3 +122,4 @@ function undo_last() {
 function redo_last() {
     
 }
+
