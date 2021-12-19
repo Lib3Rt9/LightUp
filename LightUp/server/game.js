@@ -175,17 +175,6 @@ function gameRoom() {
 
             if (data.dataType === GAME_LOGIC && data.gameState === GAME_RESTART) {
                 room.startGame();
-
-                // var timeLeft = 60;
-                // var downloadTimer = setInterval(function(){
-                //     if(timeLeft <= 0){
-                //         clearInterval(downloadTimer);
-                //         document.getElementById("countdown").innerHTML = "Finished";
-                //     } else {
-                //         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
-                //     }
-                //     timeLeft -= 1;
-                // }, 1000);
             
             }
         });
@@ -258,7 +247,6 @@ function gameRoom() {
         
 
         console.log("gameOverTimeout");
-
 
 
         room.currentGameState = GAME_START;

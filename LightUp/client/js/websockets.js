@@ -6,6 +6,7 @@ var wsGame = {
     LINE_SEGMENT : 0,
     CHAT_MESSAGE : 1,
     GAME_LOGIC : 2, // handle the game logic, contains different data for different game states
+    GAME_CLEAR : 4,
     
     // some constant for game logic state
     WAITING_TO_START : 0,
@@ -104,6 +105,11 @@ $(function(){
                         $("#chat-input").show();
                         $("#send").show();
                     }
+                }
+
+                if (data.gameState === wsGame.GAME_CLEAR) {
+                    clear_canvas();
+                    data.gameState = wsGame.WAITING_TO_START;
                 }
             }
         };

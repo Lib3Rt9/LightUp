@@ -89,31 +89,21 @@ $(document).ready(function(){
     });
 
     $(canvas).mouseup(function(event) {
-        if (wsGame.isDrawing) {
-            ctx.stroke();
-            ctx.closePath();
-            wsGame.isDrawing = false;
-        }
-        // let default changes disappear
-        event.preventDefault();
-    
-        // stop drawing -> add the path inside array when mouse out
-        if (event.type != "mouseout") {
-            restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-            index += 1;
-        }
-        
-        console.log(restore_array);
+        stop(event);
     });
 
-    // $(canvas).clearCanvas(function(event) {
-    //     clear_canvas();
+    
 
-    //     // var del = {};
-    //     // del.dataType = wsGame.LINE_SEGMENT;
-    //     // del.
-    // });
 });
+$("#clr").click(function() {
+    clear_canvas();
+
+    var data = {};
+    data.dataType = wsGame.GAME_LOGIC
+    data.gameState = wsGame.GAME_CLEAR;
+    wsGame.socket.send(JSON.stringify(data));
+});
+
 
 // getting the mouse coordinates 
 function start(event) {
@@ -133,7 +123,6 @@ function start(event) {
     // wsGame.startY = mouseY;
 
 }
-
 
 // let's start drawing
 function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
@@ -179,10 +168,7 @@ function stop(event) {
     console.log(restore_array);
 }
 
-function emitAndCanvas(){ 
-    socket.emit('clear');
-    clear_canvas();
- }
+
 // clear all the drawing
 function clear_canvas() {
     ctx.fillStyle = start_background_color;
@@ -193,7 +179,6 @@ function clear_canvas() {
     restore_array = [];
     index = -1;
 }
-wsGame.socket.on('clear', clearCanvas);
 
 
 // undo a drawing line
