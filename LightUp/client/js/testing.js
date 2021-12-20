@@ -24,7 +24,7 @@ var round = "round";
 var restore_array = [];
 var index = -1; // to know the place in the array
 
-var snapshot, redraw_snapshot;
+var snapshot;
 
 //#endregion
 
@@ -256,5 +256,5 @@ function takeSnapshot() {
 }
 
 function restoreSnapshot() {
-    redraw_snapshot = ctx.putImageData(snapshot, 0, 0);
+    ctx.putImageData(snapshot, 0, 0);
 }

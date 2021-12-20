@@ -80,7 +80,6 @@ $(function(){
             else if (data.dataType === wsGame.LINE_SEGMENT) {
                 // drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
                 draw(ctx, data.startX, data.startY, data.endX, data.endY, data.draw_color, data.draw_width);
-                console.log(redraw_snapshot);
                 
                 if (data.gameState === wsGame.MOUSE_UP) {
                     stop();
