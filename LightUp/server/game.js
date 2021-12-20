@@ -1,3 +1,5 @@
+//#region VARIABLE
+
 // server logic
 // constants to compare datatypes
 var LINE_SEGMENT = 0;
@@ -10,6 +12,9 @@ var GAME_START = 1;
 var GAME_OVER = 2;
 var GAME_RESTART = 3; 
 
+//#endregion
+
+//#region USER
 
 // store game and logic, manage all connected sockets
 // store socket connection objects and create random ID
@@ -20,7 +25,10 @@ function User(socket) {
     // assign a random number to User.
     // long enough to make duplication chance less.
     this.id = "1" + Math.floor( Math.random() * 1000000000);
-   }
+}
+//#endregion
+
+//#region ROOM
 
 // store a collection of user instances
 function Room() {
@@ -85,33 +93,29 @@ function Room() {
 
             // send to all clients in room.
             room.sendAll(JSON.stringify(data));
-
-        });
-        
+        });  
     };
-
-    
 };
+//#endregion
 
 // define User and Room classes to let other files use them
 module.exports.User = User;
 module.exports.Room = Room;
 
 
-
+// inherit Room
 gameRoom.prototype = new Room();
 
 // constructor - initialize game logic
 function gameRoom() {
 
+    //#region VARIABLE
+
     // current turn
     this.playerTurn = 0;
-
     this.wordList = ["one"];
     this.currentAnswer = undefined;
-
     this.currentGameState = WAITING_TO_START;
-
 
     // send game state to all players
     var gameLogicData ={
@@ -121,8 +125,9 @@ function gameRoom() {
     console.log(this);
     this.sendAll(JSON.stringify(gameLogicData));
 
-    
+    //#endregion
 
+    // keeps the original room's addUser function and adds extra logic
     gameRoom.prototype.addUser = function(user) {
             // a.k.a. super(user) in traditional OOP language.
             Room.prototype.addUser.call(this, user);
@@ -130,10 +135,10 @@ function gameRoom() {
             // start the game if there are 2 or more connections
             if (this.currentGameState === WAITING_TO_START && this.users.length >= 2) {
                 this.startGame();
-                
             }
     };
 
+    // handle message
     gameRoom.prototype.handleOnUserMessage = function(user) {
         var room = this;
         // handle on message
@@ -172,18 +177,14 @@ function gameRoom() {
                 }
             }
 
-
-            if (data.dataType === GAME_LOGIC && data.gameState === GAME_RESTART) {
-                room.startGame();
-            
-            }
+            if (data.dataType === GAME_LOGIC && data.gameState === GAME_RESTART) { room.startGame(); }
         });
     };
 
+    // let's start playing
     gameRoom.prototype.startGame = function() {
-
         var room = this;
-        
+
         console.log(this);
         
         // var timeLeft = 60;
@@ -212,7 +213,6 @@ function gameRoom() {
             gameState: GAME_START,
             isPlayerTurn: false
         };
-        
         this.sendAll(JSON.stringify(gameLogicDataForAllPlayers));
         
         // game start with answer to the player in turn.
@@ -222,14 +222,12 @@ function gameRoom() {
             answer: this.currentAnswer,
             isPlayerTurn: true
         };
-
         // the user who draws in this turn.
         var user = this.users[this.playerTurn];
         user.socket.send(JSON.stringify(gameLogicDataForDrawer));
         
 
         // game over after 1 minute.
-        
         gameOverTimeout = setTimeout(function(){
             if (room.currentGameState != WAITING_TO_START) {
                 var gameLogicData = {
@@ -242,16 +240,12 @@ function gameRoom() {
                 room.sendAll(JSON.stringify(gameLogicData));
                 room.currentGameState = WAITING_TO_START;
             }
-
         },60*1000);
         
-
         console.log("gameOverTimeout");
-
 
         room.currentGameState = GAME_START;
     };
 };
-
 
 module.exports.gameRoom = gameRoom;
