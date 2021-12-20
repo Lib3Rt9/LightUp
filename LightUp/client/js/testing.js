@@ -1,3 +1,5 @@
+//#region variable
+
 // take canvas field
 // var canvas = document.getElementById("drawing-pad");
 // style the canvas drawing pad
@@ -22,10 +24,11 @@ var round = "round";
 var restore_array = [];
 var index = -1; // to know the place in the array
 
-function change_color(element) {
-    draw_color = element.style.background;
-}
+//#endregion
 
+function change_color(element) { draw_color = element.style.background; }
+
+//#region action old
 
 // drawing function when pressing the mouse button - prepare and draw
 // canvas.addEventListener("touchstart", start, false);
@@ -37,14 +40,16 @@ function change_color(element) {
 // canvas.addEventListener("mouseup", stop, false);
 // canvas.addEventListener("mouseout", stop, false);
 
+//#endregion
+
 $(document).ready(function(){
     
     $(canvas).mousedown(function(event) {
 
-        // if (!wsGame.isTurnToDraw) {
-        //     wsGame.isDrawing = false;
-        //     return;
-        // }
+        if (!wsGame.isTurnToDraw) {
+            wsGame.isDrawing = false;
+            return;
+        }
 
         // start(event);
         var mouseX = event.clientX - canvas.offsetLeft;
@@ -56,9 +61,9 @@ $(document).ready(function(){
 
     $(canvas).mousemove(function(event) {
 
-        // if (!wsGame.isTurnToDraw) {
-        //     return;
-        // }
+        if (!wsGame.isTurnToDraw) {
+            return;
+        }
 
         if (wsGame.isDrawing) {
             var mouseX = event.clientX - canvas.offsetLeft;
@@ -79,7 +84,7 @@ $(document).ready(function(){
                 
                 wsGame.socket.send(JSON.stringify(data));
 
-                console.log(data);
+                // console.log(data);
 
                 wsGame.startX = mouseX;
                 wsGame.startY = mouseY;
@@ -90,20 +95,45 @@ $(document).ready(function(){
 
     $(canvas).mouseup(function(event) {
         stop(event);
+        event.preventDefault();
+
+    // stop drawing -> add the path inside array when mouse out
+    // if (event.type != "mouseout") {
+    //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    //     index += 1;
+    // }
+    
+    // console.log(restore_array);
+
+        var data = {};
+        data.dataType = wsGame.LINE_SEGMENT;
+        data.gameState = wsGame.MOUSE_UP;
+        wsGame.socket.send(JSON.stringify(data));
     });
 
+    $("#clear-btn").click(function() {
+        clear_canvas();
     
+        var data = {};
+        data.dataType = wsGame.GAME_LOGIC;
+        data.gameState = wsGame.GAME_CLEAR;
+        wsGame.socket.send(JSON.stringify(data));
+    });
+
+    $("#undo-btn").click(function() {
+        // undo_last();
+    
+        var data = {};
+        data.dataType = wsGame.LINE_SEGMENT;
+        data.gameState = wsGame.GAME_UNDO;
+        wsGame.socket.send(JSON.stringify(data));
+    
+        console.log(restore_array);
+    })
 
 });
-$("#clr").click(function() {
-    clear_canvas();
 
-    var data = {};
-    data.dataType = wsGame.GAME_LOGIC
-    data.gameState = wsGame.GAME_CLEAR;
-    wsGame.socket.send(JSON.stringify(data));
-});
-
+//#region draw action
 
 // getting the mouse coordinates 
 function start(event) {
@@ -156,18 +186,20 @@ function stop(event) {
         ctx.closePath();
         wsGame.isDrawing = false;
     }
-    // let default changes disappear
-    event.preventDefault();
 
-    // stop drawing -> add the path inside array when mouse out
-    if (event.type != "mouseout") {
-        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-        index += 1;
-    }
+    // let default changes disappear
+    // event.preventDefault();
+
+    // // stop drawing -> add the path inside array when mouse out
+    // if (event.type != "mouseout") {
+    //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    //     index += 1;
+    // }
     
-    console.log(restore_array);
+    // console.log(restore_array);
 }
 
+//#endregion
 
 // clear all the drawing
 function clear_canvas() {
@@ -179,7 +211,6 @@ function clear_canvas() {
     restore_array = [];
     index = -1;
 }
-
 
 // undo a drawing line
 function undo_last() {

@@ -7,6 +7,8 @@ var wsGame = {
     CHAT_MESSAGE : 1,
     GAME_LOGIC : 2, // handle the game logic, contains different data for different game states
     GAME_CLEAR : 4,
+    GAME_UNDO : 5,
+    MOUSE_UP : 6,
     
     // some constant for game logic state
     WAITING_TO_START : 0,
@@ -61,7 +63,7 @@ $(function(){
             // convert the JSON-formatted string back to the data object
 
             // check if the received data is chat or line segment
-            console.log("onmessage event:", e.data);
+            // console.log("onmessage event:", e.data);
             var data = JSON.parse(e.data); //  parse to JavaScript object
 
             // check if the message is chat
@@ -73,8 +75,28 @@ $(function(){
                 // drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
                 draw(ctx, data.startX, data.startY, data.endX, data.endY, data.draw_color, data.draw_width);
                 
+                if (data.gameState === wsGame.MOUSE_UP) {
+                    stop();
+                    // event.preventDefault();
+
+    // stop drawing -> add the path inside array when mouse out
+    // if (event.type != "mouseout") {
+        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        index += 1;
+    // }
+    
+    console.log(restore_array);   
+                }
+                
+                if (data.gameState === wsGame.GAME_UNDO) {
+                    undo_last();
+                    console.log(restore_array);
+                    data.gameState = wsGame.WAITING_TO_START;
+                }
+                
             }
 
+            
             else if (data.dataType === wsGame.GAME_LOGIC) {
                 if (data.gameState === wsGame.GAME_OVER) {
                     wsGame.isTurnToDraw = false;
@@ -111,6 +133,9 @@ $(function(){
                     clear_canvas();
                     data.gameState = wsGame.WAITING_TO_START;
                 }
+
+                
+                
             }
         };
     }
