@@ -106,7 +106,7 @@ $(function(){
 
                 if (data.gameState === wsGame.GAME_START) {
                     // clear the Canvas.
-                    canvas.width = canvas.width;
+                    clear_canvas();
                     
                     // hide the restart button.
                     $("#restart").hide();
@@ -206,7 +206,7 @@ function sendMessage() {
 $("#restart").hide();
 $("#restart").click(function(){
     
-    canvas.width = canvas.width;
+    clear_canvas();
     $("#chat-history").html("");
     $("#chat-history").append("<li>Restarting Game.</li>");
 
