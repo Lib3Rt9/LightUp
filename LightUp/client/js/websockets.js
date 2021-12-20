@@ -1,3 +1,4 @@
+//#region VARIABLE
 // response to the server
 
 // drawing logic
@@ -33,16 +34,15 @@ var ctx = canvas.getContext("2d"); // context
 canvas.width = window.innerWidth - 60;
 canvas.height = 400;
 
-// function change_color(element) {
-//     draw_color = element.style.background;
-// }
+//#endregion
 
-//#region 
-// -----------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
 // init script when the DOM is ready.
 $(function(){
     // check if existence of WebSockets in browser
     if (window["WebSocket"]) {
+
+        //#region SETUP CONNECTION
 
         // create connection with url of node server
         wsGame.socket = new WebSocket("ws://127.0.0.1:8000");
@@ -57,6 +57,10 @@ $(function(){
             console.log("WebSocket connection closed.");
         };
 
+        //#endregion
+
+        //#region ACTION FOR CLIENT
+
         // add handler - print out messages received from server
         // on message event - listen to the server message
         wsGame.socket.onmessage = function(e) {
@@ -65,6 +69,8 @@ $(function(){
             // check if the received data is chat or line segment
             // console.log("onmessage event:", e.data);
             var data = JSON.parse(e.data); //  parse to JavaScript object
+
+            //#region CHECK DATA_TYPE instead of GAME_LOGIC
 
             // check if the message is chat
             if (data.dataType === wsGame.CHAT_MESSAGE) {
@@ -95,15 +101,19 @@ $(function(){
                 }
                 
             }
-
+            //#endregion
             
+            //#region SET UP GAME_LOGIC
             else if (data.dataType === wsGame.GAME_LOGIC) {
+
+                // finish a game
                 if (data.gameState === wsGame.GAME_OVER) {
                     wsGame.isTurnToDraw = false;
                     $("#chat-history").append("<li>" + data.winner + " wins! The answer is '"+ data.answer + "'.</li>");
                     $("#restart").show();
                 }
 
+                // start a new game
                 if (data.gameState === wsGame.GAME_START) {
                     // clear the Canvas.
                     // canvas.width = canvas.width;
@@ -162,21 +172,19 @@ $(function(){
                     }
                 }
 
+                // when press CLEAR button
                 if (data.gameState === wsGame.GAME_CLEAR) {
                     clear_canvas();
                     data.gameState = wsGame.WAITING_TO_START;
                 }
-
-                
-                
             }
+            //#endregion
         };
+        //#endregion
     }
 });
-//#endregion
 
-
-//#region 
+//#region MESSAGE + CONTROL GAME
 // -----------------------------------------------------------------------
 // send messages to the server when click 'Send' button
 $("#send").click(sendMessage);
