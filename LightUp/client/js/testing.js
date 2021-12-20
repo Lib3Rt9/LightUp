@@ -24,6 +24,8 @@ var round = "round";
 var restore_array = [];
 var index = -1; // to know the place in the array
 
+var snapshot, redraw_snapshot;
+
 //#endregion
 
 function change_color(element) { draw_color = element.style.background; }
@@ -47,7 +49,7 @@ $(document).ready(function(){ // main action
     $(canvas).mousedown(function(event) { mousedown_touchstart(event); });
     // $(canvas).touchstart(function(event) { mouse_touch_move(event) });
 
-    $(canvas).mousemove(function(event) { mouse_touch_move(event) });
+    $(canvas).mousemove(function(event) { mouse_touch_move(event); });
     // $(canvas).touchmove(function(event) { mouse_touch_move(event) });
 
     $(canvas).mouseup(function(event) { mouse_up_out_touchend(event); });
@@ -88,6 +90,7 @@ function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
         // var mouseY = event.clientY - canvas.offsetTop;
 
         // ctx.getImageData(0, 0, canvas.width, canvas.height);
+        takeSnapshot();
         ctx.beginPath(); // begin new canvas path
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -97,7 +100,7 @@ function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
         ctx.lineJoin = "round";
         ctx.stroke();
     
-        
+        console.log(snapshot);
         
 
     // }
@@ -246,3 +249,12 @@ function undo_button() {
     console.log(restore_array);
 }
 //#endregion
+
+
+function takeSnapshot() {
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function restoreSnapshot() {
+    redraw_snapshot = ctx.putImageData(snapshot, 0, 0);
+}
