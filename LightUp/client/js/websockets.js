@@ -79,13 +79,13 @@ $(function(){
                     stop();
                     // event.preventDefault();
 
-    // stop drawing -> add the path inside array when mouse out
-    // if (event.type != "mouseout") {
-        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-        index += 1;
-    // }
-    
-    console.log(restore_array);   
+                    // stop drawing -> add the path inside array when mouse out
+                    // if (event.type != "mouseout") {
+                        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                        index += 1;
+                    // }
+                    
+                    console.log(restore_array);   
                 }
                 
                 if (data.gameState === wsGame.GAME_UNDO) {
@@ -119,6 +119,22 @@ $(function(){
                         if (wsGame.isTurnToDraw = true) {
                             $("#chat-input").hide();
                             $("#send").hide();
+
+                            $("#undo-btn").show();
+                            $("#clear-btn").show();
+                            $("#eraser-btn").show();
+
+                            $("#cWhite").show();
+                            $("#cWhite").show();
+                            $("#cBlack").show();
+                            $("#cRed").show();
+                            $("#cBlue").show();
+                            $("#cGreen").show();
+                            $("#cYellow").show();
+
+                            $("#cPicker").show();
+                            $("#penRange").show();
+                            
                         }                     
                         $("#chat-history").append("<li>Your turn to draw. Please draw '" + data.answer + "'.</li>");
                     }
@@ -126,6 +142,22 @@ $(function(){
                         $("#chat-history").append("<li>Game Started. Get Ready. You have one minute to guess.</li>");
                         $("#chat-input").show();
                         $("#send").show();
+
+                        $("#undo-btn").hide();
+                        $("#clear-btn").hide();
+                        $("#eraser-btn").hide();
+
+                        $("#cWhite").hide();
+                        $("#cWhite").hide();
+                        $("#cBlack").hide();
+                        $("#cRed").hide();
+                        $("#cBlue").hide();
+                        $("#cGreen").hide();
+                        $("#cYellow").hide();
+
+                        $("#cPicker").hide();
+                        $("#penRange").hide();
+
                     }
                 }
 
