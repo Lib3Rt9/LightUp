@@ -53,7 +53,8 @@ $(document).ready(function(){ // main action
     // $(canvas).touchmove(function(event) { mouse_touch_move(event) });
 
     $(canvas).mouseup(function(event) { mouse_up_out_touchend(event); });
-    // $(canvas).mouseout(function(event) { mouse_up_out_touchend(event); });
+    $(canvas).mouseout(function(event) { mouse_up_out_touchend(event); });
+    // $(canvas).touchend(function(event) { mouse_up_out_touchend(event); });
 
     $("#clear-btn").click(function() { clear_button(); });
 
