@@ -58,3 +58,9 @@ canvas {
     align-self: center;
     margin: 0 10px;
 }
+
+.lightBorder {
+    border: 2px solid white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

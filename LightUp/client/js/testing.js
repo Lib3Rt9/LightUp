@@ -259,3 +259,46 @@ function takeSnapshot() {
 function restoreSnapshot() {
     ctx.putImageData(snapshot, 0, 0);
 }
+
+
+
+function drawLine(event) {
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
+
+    context.beginPath();
+    context.moveTo(wsGame.startX, wsGame.startY);
+    context.lineTo(mouseX, mouseY);
+    context.stroke();
+}
+
+function drawCircle(event) {
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
+
+    var radius = Math.sqrt(Math.pow((wsGame.startX - mouseX), 2) + Math.pow((wsGame.startY - mouseY), 2));
+    context.beginPath();
+    context.arc(wsGame.startX, wsGame.startY, radius, 0, 2 * Math.PI, false);
+}
+
+function drawPolygon(event, sides, angle) {
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
+
+    var coordinates = [],
+        radius = Math.sqrt(Math.pow((wsGame.startX - mouseX), 2) + Math.pow((wsGame.startY - mouseY), 2)),
+        index = 0;
+
+    for (index = 0; index < sides; index++) {
+        coordinates.push({x: wsGame.startX + radius * Math.cos(angle), y: wsGame.startY - radius * Math.sin(angle)});
+        angle += (2 * Math.PI) / sides;
+    }
+
+    context.beginPath();
+    context.moveTo(coordinates[0].x, coordinates[0].y);
+    for (index = 1; index < sides; index++) {
+        context.lineTo(coordinates[index].x, coordinates[index].y);
+    }
+
+    context.closePath();
+}

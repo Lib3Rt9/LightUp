@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    
     <div class="field">
         <canvas id="drawing-pad"></canvas>
         
@@ -32,6 +31,20 @@
 
             <input id="cPicker" oninput="draw_color = this.value" type="color" class="color-picker">
             <input id="penRange" oninput="draw_width = this.value" type="range" min="1" max="100" class="pen-range">
+
+
+
+            <!-- testing  -->
+            <div class="lightBorder">
+                <p><input type="radio" name="shape" value="line" checked="checked">Line</p>
+                <p><input type="radio" name="shape" value="circle">Circle</p>
+                <p><input type="radio" name="shape" value="polygon">Polygon</p>
+            </div>
+        
+            <p><label>Polygon Sides: <input id="polygonSides" type="range" step="1" min="3" max="10"></label></p>
+            <p><label>Polygon Angle: <input id="polygonAngle" type="range" step="22.5" min="0" max="90"></label></p>
+
+
         </div>
 
         <!-- input and send message to server --> <!-- comment -->
