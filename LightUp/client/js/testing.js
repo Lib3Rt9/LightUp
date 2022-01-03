@@ -260,7 +260,7 @@ function restoreSnapshot() {
     ctx.putImageData(snapshot, 0, 0);
 }
 
-
+// test drawing shape
 
 function drawLine(event) {
     var mouseX = event.clientX - canvas.offsetLeft;
