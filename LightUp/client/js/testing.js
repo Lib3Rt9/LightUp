@@ -83,25 +83,32 @@ function start(event) { // merged with draw() - keep as reference
 }
 
 // let's start drawing
-function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
-    
+function draw(ctx, x1, y1, x2, y2, draw_color, draw_width, position) {
+    var fillBox = document.getElementById("fillBox"),
+        shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
+        polygonSides = document.getElementById("polygonSides").value,
+        polygonAngle = document.getElementById("polygonAngle").value;
+        // lineCap = document.querySelector('input[type="radio"][name="lineCap"]:checked').value;
+
+
     // if (wsGame.isDrawing == true) {
 
         // var mouseX = event.clientX - canvas.offsetLeft;
         // var mouseY = event.clientY - canvas.offsetTop;
 
         // ctx.getImageData(0, 0, canvas.width, canvas.height);
+        
         takeSnapshot();
         ctx.beginPath(); // begin new canvas path
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
+        ctx.stroke();
         ctx.strokeStyle = draw_color;
         ctx.lineWidth = draw_width;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        ctx.stroke();
     
-        console.log(snapshot);
+        // console.log(snapshot);
         
 
     // }
@@ -260,25 +267,26 @@ function restoreSnapshot() {
     ctx.putImageData(snapshot, 0, 0);
 }
 
+
 // test drawing shape
 
-function drawLine(event) {
+function drawLine(event, x2, y2, position) {
     var mouseX = event.clientX - canvas.offsetLeft;
     var mouseY = event.clientY - canvas.offsetTop;
 
-    context.beginPath();
-    context.moveTo(wsGame.startX, wsGame.startY);
-    context.lineTo(mouseX, mouseY);
-    context.stroke();
+    ctx.beginPath();
+    ctx.moveTo(wsGame.startX, wsGame.startY);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
 }
 
-function drawCircle(event) {
+function drawCircle(event, position) {
     var mouseX = event.clientX - canvas.offsetLeft;
     var mouseY = event.clientY - canvas.offsetTop;
 
     var radius = Math.sqrt(Math.pow((wsGame.startX - mouseX), 2) + Math.pow((wsGame.startY - mouseY), 2));
-    context.beginPath();
-    context.arc(wsGame.startX, wsGame.startY, radius, 0, 2 * Math.PI, false);
+    ctx.beginPath();
+    ctx.arc(wsGame.startX, wsGame.startY, radius, 0, 2 * Math.PI, false);
 }
 
 function drawPolygon(event, sides, angle) {
@@ -294,11 +302,11 @@ function drawPolygon(event, sides, angle) {
         angle += (2 * Math.PI) / sides;
     }
 
-    context.beginPath();
-    context.moveTo(coordinates[0].x, coordinates[0].y);
+    ctx.beginPath();
+    ctx.moveTo(coordinates[0].x, coordinates[0].y);
     for (index = 1; index < sides; index++) {
-        context.lineTo(coordinates[index].x, coordinates[index].y);
+        ctx.lineTo(coordinates[index].x, coordinates[index].y);
     }
 
-    context.closePath();
+    ctx.closePath();
 }

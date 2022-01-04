@@ -136,6 +136,9 @@ function gameRoom() {
             if (this.currentGameState === WAITING_TO_START && this.users.length >= 2) {
                 this.startGame();
             }
+            else {
+                this.currentGameState = GAME_OVER;
+            }
     };
 
     // handle message
