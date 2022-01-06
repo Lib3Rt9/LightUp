@@ -28,8 +28,6 @@ var snapshot;
 
 //#endregion
 
-function change_color(element) { draw_color = element.style.background; }
-
 //#region action old
 
 // drawing function when pressing the mouse button - prepare and draw
@@ -236,6 +234,10 @@ function mouse_up_out_touchend(event) {
         data.gameState = wsGame.MOUSE_UP;
         wsGame.socket.send(JSON.stringify(data));
 }
+//#endregion
+
+//#region BONUS FEATURES
+function change_color(element) { draw_color = element.style.background; }
 
 function clear_button() {
     clear_canvas();
@@ -256,16 +258,13 @@ function undo_button() {
 
     console.log(restore_array);
 }
+
+function takeSnapshot() { snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height); }
+
+function restoreSnapshot() { ctx.putImageData(snapshot, 0, 0); }
 //#endregion
 
 
-function takeSnapshot() {
-    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-}
-
-function restoreSnapshot() {
-    ctx.putImageData(snapshot, 0, 0);
-}
 
 
 // test drawing shape
