@@ -24,7 +24,7 @@ var round = "round";
 var restore_array = [];
 var index = -1; // to know the place in the array
 
-var snapshot;
+var snapshot, dragging = false, dragStartLocation;
 
 //#endregion
 
@@ -81,14 +81,7 @@ function start(event) { // merged with draw() - keep as reference
 }
 
 // let's start drawing
-function draw(ctx, x1, y1, x2, y2, draw_color, draw_width, position) {
-    var fillBox = document.getElementById("fillBox"),
-        shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
-        polygonSides = document.getElementById("polygonSides").value,
-        polygonAngle = document.getElementById("polygonAngle").value;
-        // lineCap = document.querySelector('input[type="radio"][name="lineCap"]:checked').value;
-
-
+function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
     // if (wsGame.isDrawing == true) {
 
         // var mouseX = event.clientX - canvas.offsetLeft;
@@ -184,7 +177,7 @@ function mousedown_touchstart(event) {
     wsGame.isDrawing = true;
 }
 
-function mouse_touch_move(event) {
+function mouse_touch_move(event, position) {
     if (!wsGame.isTurnToDraw) {
         return;
     }
@@ -193,8 +186,10 @@ function mouse_touch_move(event) {
         var mouseX = event.clientX - canvas.offsetLeft;
         var mouseY = event.clientY - canvas.offsetTop;
 
-        if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
-        // draw(event);
+        console.log(mouseX, mouseY);
+
+        // if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
+
             draw(ctx, wsGame.startX, wsGame.startY, mouseX, mouseY, draw_color, draw_width);
 
             var data = {};
@@ -212,27 +207,27 @@ function mouse_touch_move(event) {
 
             wsGame.startX = mouseX;
             wsGame.startY = mouseY;
-        }
+        // }
     }
     event.preventDefault();
 }
 
 function mouse_up_out_touchend(event) {
     stop(event);
-        event.preventDefault();
+    event.preventDefault();
 
-        // stop drawing -> add the path inside array when mouse out
-        // if (event.type != "mouseout") {
-        //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-        //     index += 1;
-        // }
-        
-        // console.log(restore_array);
+    // stop drawing -> add the path inside array when mouse out
+    // if (event.type != "mouseout") {
+    //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    //     index += 1;
+    // }
+    
+    // console.log(restore_array);
 
-        var data = {};
-        data.dataType = wsGame.LINE_SEGMENT;
-        data.gameState = wsGame.MOUSE_UP;
-        wsGame.socket.send(JSON.stringify(data));
+    var data = {};
+    data.dataType = wsGame.LINE_SEGMENT;
+    data.gameState = wsGame.MOUSE_UP;
+    wsGame.socket.send(JSON.stringify(data));
 }
 //#endregion
 
@@ -267,45 +262,95 @@ function restoreSnapshot() { ctx.putImageData(snapshot, 0, 0); }
 
 
 
+
+
+
 // test drawing shape
 
-function drawLine(event, x2, y2, position) {
-    var mouseX = event.clientX - canvas.offsetLeft;
-    var mouseY = event.clientY - canvas.offsetTop;
+function getCanvasCoordinates(event) {
+    var xx = event.clientX - canvas.offsetLeft,
+        yy = event.clientY - canvas.offsetTop;
 
+    return {xx: xx, yy: yy};
+}
+
+function drawLine(ctx, x1, y1, x2, y2) {
     ctx.beginPath();
-    ctx.moveTo(wsGame.startX, wsGame.startY);
-    ctx.lineTo(x2, y2);
+    ctx.moveTo(dragStartLocation.xx, dragStartLocation.yy);
+    ctx.lineTo(position.xx, position.yy);
     ctx.stroke();
 }
 
-function drawCircle(event, position) {
-    var mouseX = event.clientX - canvas.offsetLeft;
-    var mouseY = event.clientY - canvas.offsetTop;
-
-    var radius = Math.sqrt(Math.pow((wsGame.startX - mouseX), 2) + Math.pow((wsGame.startY - mouseY), 2));
+function drawCircle(position) {
+    var radius = Math.sqrt(Math.pow((dragStartLocation.xx - position.xx), 2) + Math.pow((dragStartLocation.yy - position.yy), 2));
     ctx.beginPath();
-    ctx.arc(wsGame.startX, wsGame.startY, radius, 0, 2 * Math.PI, false);
+    ctx.arc(dragStartLocation.xx, dragStartLocation.yy, radius, 0, 2 * Math.PI, false);
 }
 
-function drawPolygon(event, sides, angle) {
-    var mouseX = event.clientX - canvas.offsetLeft;
-    var mouseY = event.clientY - canvas.offsetTop;
-
+function drawPolygon(position, sides, angle) {
     var coordinates = [],
-        radius = Math.sqrt(Math.pow((wsGame.startX - mouseX), 2) + Math.pow((wsGame.startY - mouseY), 2)),
+        radius = Math.sqrt(Math.pow((dragStartLocation.xx - position.xx), 2) + Math.pow((dragStartLocation.yy - position.yy), 2)),
         index = 0;
 
     for (index = 0; index < sides; index++) {
-        coordinates.push({x: wsGame.startX + radius * Math.cos(angle), y: wsGame.startY - radius * Math.sin(angle)});
+        coordinates.push({x: dragStartLocation.xx + radius * Math.cos(angle), y: dragStartLocation.yy - radius * Math.sin(angle)});
         angle += (2 * Math.PI) / sides;
     }
 
     ctx.beginPath();
-    ctx.moveTo(coordinates[0].x, coordinates[0].y);
+    ctx.moveTo(coordinates[0].xx, coordinates[0].yy);
     for (index = 1; index < sides; index++) {
-        ctx.lineTo(coordinates[index].x, coordinates[index].y);
+        ctx.lineTo(coordinates[index].xx, coordinates[index].yy);
     }
 
     ctx.closePath();
+}
+
+function drawShape(position) {
+    var // fillBox = document.getElementById("fillBox"),
+        shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
+        polygonSides = document.getElementById("polygonSides").value,
+        polygonAngle = document.getElementById("polygonAngle").value;
+        // lineCap = document.querySelector('input[type="radio"][name="lineCap"]:checked').value
+
+    // ctx.lineCap = lineCap;
+
+    if (shape === "circle") {
+        drawCircle(position);
+    }
+    if (shape === "line") {
+        drawLine(position);
+        console.log(position);
+    }
+
+    if (shape === "polygon") {
+        drawPolygon(position, polygonSides, polygonAngle * (Math.PI / 180));
+    }
+    if (fillBox.checked) {
+        ctx.fill();
+    } else {
+        ctx.stroke();
+    }
+}
+
+function dragStart(event) {
+    dragging = true;
+    dragStartLocation = getCanvasCoordinates(event);
+    takeSnapshot();
+}
+
+function drag(event) {
+    var position;
+    if (dragging === true) {
+        restoreSnapshot();
+        position = getCanvasCoordinates(event);
+        drawShape(position, "polygon");
+    }
+}
+
+function dragStop(event) {
+    dragging = false;
+    restoreSnapshot();
+    var position = getCanvasCoordinates(event);
+    drawShape(position, "polygon");
 }
