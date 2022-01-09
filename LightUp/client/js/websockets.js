@@ -108,10 +108,12 @@ $(function(){
                 drawLine(ctx, data.dragStartLocation, data.position, data.draw_color, data.draw_width);
             }
             else if (data.dataType === wsGame.DRAW_CIRCLE) {
-                drawCircle(ctx, data.position, data.draw_color, data.width);
+                drawCircle(ctx, data.dragStartLocation, data.position, data.radius, data.draw_color, data.width);
+                // console.log(data.position);
             }
             else if (data.dataType === wsGame.DRAW_POLYGON) {
-                drawPolygon(ctx, data.position, data.draw_color, data.width);
+                drawPolygon(ctx, data.dragStartLocation, data.position, data.coordinates, data.radius, data.indexPolygon, data.polygonSides, data.polygonAngle, data.draw_color, data.width);
+                console.log(data.polygonSides);
             }
             //#endregion
             

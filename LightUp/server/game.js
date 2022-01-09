@@ -243,7 +243,7 @@ function gameRoom() {
                 room.sendAll(JSON.stringify(gameLogicData));
                 room.currentGameState = WAITING_TO_START;
             }
-        },60*1000);
+        },60*100000);
         
         console.log("gameOverTimeout");
 
