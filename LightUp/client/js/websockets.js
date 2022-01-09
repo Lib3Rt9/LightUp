@@ -84,7 +84,7 @@ $(function(){
                 // drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
                 draw(ctx, data.startX, data.startY, data.endX, data.endY, data.draw_color, data.draw_width);
                 
-                if (data.gameState === wsGame.MOUSE_UP) {
+                if (data.gameState === wsGame.MOUSE_UP){
                     stop();
                     // event.preventDefault();
 
@@ -105,15 +105,18 @@ $(function(){
                 
             }
             else if (data.dataType === wsGame.DRAW_LINE) {
+                // restoreSnapshot();
                 drawLine(ctx, data.dragStartLocation, data.position, data.draw_color, data.draw_width);
             }
             else if (data.dataType === wsGame.DRAW_CIRCLE) {
+                // restoreSnapshot();
                 drawCircle(ctx, data.dragStartLocation, data.position, data.radius, data.draw_color, data.width);
                 // console.log(data.position);
             }
             else if (data.dataType === wsGame.DRAW_POLYGON) {
+                // restoreSnapshot();
                 drawPolygon(ctx, data.dragStartLocation, data.position, data.coordinates, data.radius, data.indexPolygon, data.polygonSides, data.polygonAngle, data.draw_color, data.width);
-                console.log(data.polygonSides);
+                // console.log(data.polygonSides);
             }
             //#endregion
             
