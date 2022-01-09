@@ -24,7 +24,7 @@ var round = "round";
 var restore_array = [];
 var index = -1; // to know the place in the array
 
-var snapshot, dragging = false, dragStartLocation;
+var snapshot, dragging = false, dragStartLocation, xx, yy;
 
 //#endregion
 
@@ -51,7 +51,7 @@ $(document).ready(function(){ // main action
     // $(canvas).touchmove(function(event) { mouse_touch_move(event) });
 
     $(canvas).mouseup(function(event) { mouse_up_out_touchend(event); });
-    $(canvas).mouseout(function(event) { mouse_up_out_touchend(event); });
+    // $(canvas).mouseout(function(event) { mouse_up_out_touchend(event); });
     // $(canvas).touchend(function(event) { mouse_up_out_touchend(event); });
 
     $("#clear-btn").click(function() { clear_button(); });
@@ -175,21 +175,31 @@ function mousedown_touchstart(event) {
     wsGame.startX = mouseX;
     wsGame.startY = mouseY;
     wsGame.isDrawing = true;
+
+    dragStart(event);
 }
 
-function mouse_touch_move(event, position) {
+function mouse_touch_move(event) {
     if (!wsGame.isTurnToDraw) {
         return;
     }
+
+    var shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
+        polygonSides = document.getElementById("polygonSides").value,
+        polygonAngle = document.getElementById("polygonAngle").value;
 
     if (wsGame.isDrawing) {
         var mouseX = event.clientX - canvas.offsetLeft;
         var mouseY = event.clientY - canvas.offsetTop;
 
+        position = getCanvasCoordinates(event);
+
         console.log(mouseX, mouseY);
 
         // if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
 
+            // restoreSnapshot();
+        if (shape === "normal") {
             draw(ctx, wsGame.startX, wsGame.startY, mouseX, mouseY, draw_color, draw_width);
 
             var data = {};
@@ -208,6 +218,52 @@ function mouse_touch_move(event, position) {
             wsGame.startX = mouseX;
             wsGame.startY = mouseY;
         // }
+        }
+        if (shape === "line") {
+            restoreSnapshot();
+            drawLine(ctx, dragStartLocation, position, draw_color, draw_width);
+
+            var data = {};
+            data.dataType = wsGame.DRAW_LINE;
+            data.dragStartLocation = dragStartLocation;
+            data.position = position;
+            data.draw_color = draw_color;
+            data.draw_width = draw_width;
+
+            wsGame.socket.send(JSON.stringify(data));
+        }
+        if (shape === "circle") {
+            restoreSnapshot();
+            drawCircle(position, draw_color, draw_width);
+
+            var data = {};
+            data.dataType = wsGame.DRAW_CIRCLE;
+            data.position = position;
+            data.draw_color = draw_color;
+            data.draw_width = draw_width;
+
+            wsGame.socket.send(JSON.stringify(data));
+        }
+        if (shape === "polygon") {
+            restoreSnapshot();
+            drawPolygon(position, polygonSides, polygonAngle * (Math.PI / 180));
+
+            var data = {};
+            data.dataType = wsGame.DRAW_POLYGON;
+            data.position = position;
+            data.draw_color = draw_color;
+            data.draw_width = draw_width;
+
+            wsGame.socket.send(JSON.stringify(data));
+        }
+        // if (fillBox.checked) {
+        //     ctx.fill();
+         else {
+            ctx.stroke();
+        }
+        
+        // drawShape(position);
+        ctx.stroke();
     }
     event.preventDefault();
 }
@@ -274,33 +330,37 @@ function getCanvasCoordinates(event) {
     return {xx: xx, yy: yy};
 }
 
-function drawLine(ctx, x1, y1, x2, y2) {
+function drawLine(ctx, dragStartLocation, position, draw_color, draw_width) {
     ctx.beginPath();
     ctx.moveTo(dragStartLocation.xx, dragStartLocation.yy);
     ctx.lineTo(position.xx, position.yy);
     ctx.stroke();
+    ctx.strokeStyle = draw_color;
+    ctx.lineWidth = draw_width;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 }
 
-function drawCircle(position) {
+function drawCircle(ctx, position) {
     var radius = Math.sqrt(Math.pow((dragStartLocation.xx - position.xx), 2) + Math.pow((dragStartLocation.yy - position.yy), 2));
     ctx.beginPath();
     ctx.arc(dragStartLocation.xx, dragStartLocation.yy, radius, 0, 2 * Math.PI, false);
 }
 
-function drawPolygon(position, sides, angle) {
+function drawPolygon(ctx, position, sides, angle) {
     var coordinates = [],
         radius = Math.sqrt(Math.pow((dragStartLocation.xx - position.xx), 2) + Math.pow((dragStartLocation.yy - position.yy), 2)),
-        index = 0;
+        indexx = 0;
 
-    for (index = 0; index < sides; index++) {
-        coordinates.push({x: dragStartLocation.xx + radius * Math.cos(angle), y: dragStartLocation.yy - radius * Math.sin(angle)});
+    for (indexx = 0; indexx < sides; indexx++) {
+        coordinates.push({xx: dragStartLocation.xx + radius * Math.cos(angle), yy: dragStartLocation.yy - radius * Math.sin(angle)});
         angle += (2 * Math.PI) / sides;
     }
 
     ctx.beginPath();
     ctx.moveTo(coordinates[0].xx, coordinates[0].yy);
-    for (index = 1; index < sides; index++) {
-        ctx.lineTo(coordinates[index].xx, coordinates[index].yy);
+    for (indexx = 1; indexx < sides; indexx++) {
+        ctx.lineTo(coordinates[indexx].xx, coordinates[indexx].yy);
     }
 
     ctx.closePath();
@@ -320,15 +380,13 @@ function drawShape(position) {
     }
     if (shape === "line") {
         drawLine(position);
-        console.log(position);
     }
-
     if (shape === "polygon") {
         drawPolygon(position, polygonSides, polygonAngle * (Math.PI / 180));
     }
-    if (fillBox.checked) {
-        ctx.fill();
-    } else {
+    // if (fillBox.checked) {
+    //     ctx.fill();
+     else {
         ctx.stroke();
     }
 }
@@ -354,3 +412,5 @@ function dragStop(event) {
     var position = getCanvasCoordinates(event);
     drawShape(position, "polygon");
 }
+
+// var ressssss = restoreSnapshot();

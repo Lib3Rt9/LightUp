@@ -10,6 +10,9 @@ var wsGame = {
     GAME_CLEAR : 4,
     GAME_UNDO : 5,
     MOUSE_UP : 6,
+    DRAW_LINE : 7,
+    DRAW_CIRCLE : 8,
+    DRAW_POLYGON : 9,
     
     // some constant for game logic state
     WAITING_TO_START : 0,
@@ -100,6 +103,15 @@ $(function(){
                     data.gameState = wsGame.WAITING_TO_START;
                 }
                 
+            }
+            else if (data.dataType === wsGame.DRAW_LINE) {
+                drawLine(ctx, data.dragStartLocation, data.position, data.draw_color, data.draw_width);
+            }
+            else if (data.dataType === wsGame.DRAW_CIRCLE) {
+                drawCircle(ctx, data.position, data.draw_color, data.width);
+            }
+            else if (data.dataType === wsGame.DRAW_POLYGON) {
+                drawPolygon(ctx, data.position, data.draw_color, data.width);
             }
             //#endregion
             
