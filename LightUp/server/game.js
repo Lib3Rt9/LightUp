@@ -12,6 +12,7 @@ var GAME_START = 1;
 var GAME_OVER = 2;
 var GAME_RESTART = 3; 
 
+var inputTimeout = 60; // change to input
 //#endregion
 
 //#region USER
@@ -129,16 +130,22 @@ function gameRoom() {
 
     // keeps the original room's addUser function and adds extra logic
     gameRoom.prototype.addUser = function(user) {
-            // a.k.a. super(user) in traditional OOP language.
-            Room.prototype.addUser.call(this, user);
-            
-            // start the game if there are 2 or more connections
-            if (this.currentGameState === WAITING_TO_START && this.users.length >= 2) {
-                this.startGame();
-            }
-            // else {
-            //     this.currentGameState = GAME_OVER;
+        // a.k.a. super(user) in traditional OOP language.
+        Room.prototype.addUser.call(this, user);
+        
+        // start the game if there are 2 or more connections
+        if (this.currentGameState === WAITING_TO_START && 2 <= this.users.length <= 9) {
+            this.startGame();
+            // if (this.users.length < 2 && this.users.length > 9) {
+            //     this.currentGameState = WAITING_TO_START;
+            //     window.alert("Number of connections is 2 at minimum and 6 at maximum.");
             // }
+        }
+        // else {
+        //     this.currentGameState = GAME_OVER;
+        //     this.currentGameState = WAITING_TO_START;
+        //     window.alert("Number of connections is 2 at minimum and 6 at maximum.");
+        // }
     };
 
     // handle message
@@ -189,17 +196,6 @@ function gameRoom() {
         var room = this;
 
         console.log(this);
-        
-        // var timeLeft = 60;
-        // var downloadTimer = setInterval(function(){
-        //     if(timeLeft <= 0){
-        //         clearInterval(downloadTimer);
-        //         document.getElementById("countdown").innerHTML = "Finished";
-        //     } else {
-        //         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
-        //     }
-        //     timeLeft -= 1;
-        // }, 1000);
 
         // pick a player to draw
         this.playerTurn = (this.playerTurn + 1) % this.users.length;
@@ -243,9 +239,9 @@ function gameRoom() {
                 room.sendAll(JSON.stringify(gameLogicData));
                 room.currentGameState = WAITING_TO_START;
             }
-        },60*100000);
+        }, inputTimeout*1000);
         
-        console.log("gameOverTimeout");
+        console.log(gameOverTimeout);
 
         room.currentGameState = GAME_START;
     };

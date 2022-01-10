@@ -37,6 +37,7 @@ var ctx = canvas.getContext("2d"); // context
 canvas.width = window.innerWidth - 60;
 canvas.height = 400;
 
+var inputTimeout = 60; // change to input
 //#endregion
 
 // ------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +95,7 @@ $(function(){
                         index += 1;
                     // }
                     
-                    console.log(restore_array);   
+                    // console.log(restore_array);   
                 }
                 
                 if (data.gameState === wsGame.GAME_UNDO) {
@@ -115,7 +116,7 @@ $(function(){
             }
             else if (data.dataType === wsGame.DRAW_POLYGON) {
                 // restoreSnapshot();
-                drawPolygon(ctx, data.dragStartLocation, data.position, data.coordinates, data.radius, data.indexPolygon, data.polygonSides, data.polygonAngle, data.draw_color, data.width);
+                drawPolygon(ctx, data.dragStartLocation, data.position, data.coordinates, data.radius, data.indexPolygon, data.polygonSides, data.calPolAngle, data.draw_color, data.width);
                 // console.log(data.polygonSides);
             }
             //#endregion
@@ -132,6 +133,20 @@ $(function(){
 
                 // start a new game
                 if (data.gameState === wsGame.GAME_START) {
+                    var timeLeft = inputTimeout;
+                    var downloadTimer = setInterval(function(){
+                        if (timeLeft <= 0) {
+                            clearInterval(downloadTimer);
+                            document.getElementById("countdown").innerHTML = "Time is up!";
+                        } else {
+                            document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+                        }            
+                        timeLeft -= 1;
+                    }, 1000);
+                    console.log(timeLeft);
+                    console.log(inputTimeout);
+
+
                     // clear the Canvas.
                     // canvas.width = canvas.width;
                     clear_canvas();
@@ -149,6 +164,7 @@ $(function(){
                             $("#send").hide();
 
                             $("#undo-btn").show();
+                            $("#redo-btn").show();
                             $("#clear-btn").show();
                             $("#eraser-btn").show();
 
@@ -162,6 +178,10 @@ $(function(){
 
                             $("#cPicker").show();
                             $("#penRange").show();
+
+                            $("#shapeCheckbox").show();
+                            $("#polSide").show();
+                            $("#polAngle").show();
                             
                         }                     
                         $("#chat-history").append("<li>Your turn to draw. Please draw '" + data.answer + "'.</li>");
@@ -172,6 +192,7 @@ $(function(){
                         $("#send").show();
 
                         $("#undo-btn").hide();
+                        $("#redo-btn").hide();
                         $("#clear-btn").hide();
                         $("#eraser-btn").hide();
 
@@ -186,6 +207,9 @@ $(function(){
                         $("#cPicker").hide();
                         $("#penRange").hide();
 
+                        $("#shapeCheckbox").hide();
+                        $("#polSide").hide();
+                        $("#polAngle").hide();
                     }
                 }
 
@@ -234,7 +258,7 @@ $("#restart").click(function(){
     
     // canvas.width = canvas.width;
     clear_canvas();
-    $("#chat-history").html("");
+    // $("#chat-history").html("");
     $("#chat-history").append("<li>Restarting Game.</li>");
 
     // pack the restart message into an object.

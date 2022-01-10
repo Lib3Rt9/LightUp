@@ -13,11 +13,13 @@
 
 <body>
     <div class="field">
+        <div id="countdown" style="color: white">Time</div>
+
         <canvas id="drawing-pad"></canvas>
         
         <div class="tools">
             <button id="undo-btn" class="button" type="button">Undo</button>
-            <!-- <button onclick="redo_last()" type="button"class="button" type="button">Redo</button> -->
+            <button id="redo-btn" onclick="redo_last()" type="button"class="button" type="button">Redo</button>
             <button id="clear-btn" class="button" type="button">Clear</button>
             
             <div id="eraser-btn" onclick="change_color(this)" class="color-field" style="background: white">Eraser icon here</div>
@@ -34,15 +36,16 @@
 
 
             <!-- testing  -->
-            <div class="lightBorder">
-                <p><input type="radio" name="shape" value="normal" >Normal</p>
+            <div id="shapeCheckbox" class="lightBorder">
+                <p><input type="radio" name="shape" value="normal" checked="checked">Normal</p>
+                <p><input type="radio" name="shape" value="line">Line</p>
                 <p><input type="radio" name="shape" value="circle">Circle</p>
                 <p><input type="radio" name="shape" value="polygon">Polygon</p>
-                <p><input type="radio" name="shape" value="line"checked="checked">Line</p>
+                
             </div>
         
-            <p><label>Polygon Sides: <input id="polygonSides" type="range" step="1" min="3" max="10"></label></p>
-            <p><label>Polygon Angle: <input id="polygonAngle" type="range" step="22.5" min="0" max="90"></label></p>
+            <p id="polSide"><label>Polygon Sides: <input id="polygonSides" type="range" step="1" min="3" max="10"></label></p>
+            <p id="polAngle"><label>Polygon Angle: <input id="polygonAngle" type="range" step="22.5" min="0" max="90"></label></p>
 
 
         </div>

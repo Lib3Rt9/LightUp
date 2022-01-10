@@ -92,6 +92,8 @@ function mouse_touch_move(event) {
         polygonSides = document.getElementById("polygonSides").value,
         polygonAngle = document.getElementById("polygonAngle").value;
 
+    var calPolAngle = polygonAngle * (Math.PI / 180);
+
     if (wsGame.isDrawing) {
         var mouseX = event.clientX - canvas.offsetLeft;
         var mouseY = event.clientY - canvas.offsetTop;
@@ -116,7 +118,7 @@ function mouse_touch_move(event) {
                     
                     wsGame.socket.send(JSON.stringify(data));
 
-                    console.log(index);
+                    // console.log(index);
 
                     wsGame.startX = mouseX;
                     wsGame.startY = mouseY;
@@ -155,7 +157,7 @@ function mouse_touch_move(event) {
             if (shape === "polygon")
             {
                 restoreSnapshot();
-                drawPolygon(ctx, dragStartLocation, position, coordinates, radius, indexPolygon, polygonSides, polygonAngle * (Math.PI / 180), draw_color, draw_width);
+                drawPolygon(ctx, dragStartLocation, position, coordinates, radius, indexPolygon, polygonSides, calPolAngle, draw_color, draw_width);
 
                 var data = {};
                 data.dataType = wsGame.DRAW_POLYGON;
@@ -165,13 +167,13 @@ function mouse_touch_move(event) {
                 data.radius = radius;
                 data.indexPolygon = indexPolygon;
                 data.polygonSides = polygonSides;
-                data.polygonAngle = polygonAngle * (Math.PI / 180);
+                data.calPolAngle = calPolAngle;
                 data.draw_color = draw_color;
                 data.draw_width = draw_width;
 
                 wsGame.socket.send(JSON.stringify(data));
-                // console.log(polygonSides);
-                // console.log(data.polygonSides);
+                console.log(calPolAngle);
+                console.log(data.calPolAngle);
             }
             // else
             // {
@@ -179,7 +181,7 @@ function mouse_touch_move(event) {
             // }
         // }
 
-        // ctx.stroke();
+        ctx.stroke();
     }
     event.preventDefault();
 }
@@ -355,7 +357,7 @@ function undo_last() {
 
 // redo a drawing line
 function redo_last() {
-    
+    window.alert("This feature is being updated...");
 }
 
 //#endregion
