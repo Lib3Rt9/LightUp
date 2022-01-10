@@ -29,6 +29,8 @@ var coordinates = [], indexPolygon = 0;
 
 //#endregion
 
+// ===================================================================================
+// ===================================================================================
 //#region action old
 
 // drawing function when pressing the mouse button - prepare and draw
@@ -43,7 +45,9 @@ var coordinates = [], indexPolygon = 0;
 
 //#endregion
 
-$(document).ready(function(){ // main action
+// ===================================================================================
+// ===================================================================================
+$(document).ready(function(){ // MAIN FUNCTION
     
     $(canvas).mousedown(function(event) { mousedown_touchstart(event); });
     // $(canvas).touchstart(function(event) { mouse_touch_move(event) });
@@ -60,7 +64,148 @@ $(document).ready(function(){ // main action
     $("#undo-btn").click(function() { undo_button(); })
 });
 
-//#region DRAW ACTION
+// ===================================================================================
+// ===================================================================================
+//#region CONTROL ACTION and SEND to SERVER
+function mousedown_touchstart(event) {
+    if (!wsGame.isTurnToDraw) {
+        wsGame.isDrawing = false;
+        return;
+    }
+
+    // start(event);
+    var mouseX = event.clientX - canvas.offsetLeft;
+    var mouseY = event.clientY - canvas.offsetTop;
+    wsGame.startX = mouseX;
+    wsGame.startY = mouseY;
+    wsGame.isDrawing = true;
+
+    dragStart(event);
+}
+
+function mouse_touch_move(event) {
+    if (!wsGame.isTurnToDraw) {
+        return;
+    }
+
+    var shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
+        polygonSides = document.getElementById("polygonSides").value,
+        polygonAngle = document.getElementById("polygonAngle").value;
+
+    if (wsGame.isDrawing) {
+        var mouseX = event.clientX - canvas.offsetLeft;
+        var mouseY = event.clientY - canvas.offsetTop;
+
+        position = getCanvasCoordinates(event);
+
+            // restoreSnapshot();
+            if (shape === "normal")
+            {
+                if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
+                    // restoreSnapshot();
+                    draw(ctx, wsGame.startX, wsGame.startY, mouseX, mouseY, draw_color, draw_width);
+
+                    var data = {};
+                    data.dataType = wsGame.LINE_SEGMENT;
+                    data.startX = wsGame.startX;
+                    data.startY = wsGame.startY;
+                    data.endX = mouseX;
+                    data.endY = mouseY;
+                    data.draw_color = draw_color;
+                    data.draw_width = draw_width;
+                    
+                    wsGame.socket.send(JSON.stringify(data));
+
+                    console.log(index);
+
+                    wsGame.startX = mouseX;
+                    wsGame.startY = mouseY;
+                }
+            }
+            if (shape === "line")
+            {
+                restoreSnapshot();
+                drawLine(ctx, dragStartLocation, position, draw_color, draw_width);
+                
+                var data = {};
+                data.dataType = wsGame.DRAW_LINE;
+                data.dragStartLocation = dragStartLocation;
+                data.position = position;
+                data.draw_color = draw_color;
+                data.draw_width = draw_width;
+
+                wsGame.socket.send(JSON.stringify(data));
+            }
+            if (shape === "circle")
+            {
+                restoreSnapshot();
+                drawCircle(ctx, dragStartLocation, position, radius, draw_color, draw_width);
+
+                var data = {};
+                data.dataType = wsGame.DRAW_CIRCLE;
+                data.dragStartLocation = dragStartLocation;
+                data.position = position;
+                data.radius = radius;
+                data.draw_color = draw_color;
+                data.draw_width = draw_width;
+
+                wsGame.socket.send(JSON.stringify(data));
+                // console.log(data.position);
+            }
+            if (shape === "polygon")
+            {
+                restoreSnapshot();
+                drawPolygon(ctx, dragStartLocation, position, coordinates, radius, indexPolygon, polygonSides, polygonAngle * (Math.PI / 180), draw_color, draw_width);
+
+                var data = {};
+                data.dataType = wsGame.DRAW_POLYGON;
+                data.dragStartLocation = dragStartLocation;
+                data.position = position;
+                data.coordinates = coordinates;
+                data.radius = radius;
+                data.indexPolygon = indexPolygon;
+                data.polygonSides = polygonSides;
+                data.polygonAngle = polygonAngle * (Math.PI / 180);
+                data.draw_color = draw_color;
+                data.draw_width = draw_width;
+
+                wsGame.socket.send(JSON.stringify(data));
+                // console.log(polygonSides);
+                // console.log(data.polygonSides);
+            }
+            // else
+            // {
+            //     ctx.stroke();
+            // }
+        // }
+
+        // ctx.stroke();
+    }
+    event.preventDefault();
+}
+
+function mouse_up_out_touchend(event) {
+    stop();
+    event.preventDefault();
+
+    // stop drawing -> add the path inside array when mouse out
+    // if (event.type != "mouseout") {
+    //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    //     index += 1;
+    // }
+    
+    // console.log(restore_array);
+
+    var data = {};
+    data.dataType = wsGame.LINE_SEGMENT;
+    data.gameState = wsGame.MOUSE_UP;
+    wsGame.socket.send(JSON.stringify(data));
+}
+//#endregion
+
+// ===================================================================================
+// ===================================================================================
+//#region BASIC DRAW ACTION
 
 // getting the mouse coordinates 
 function start(event) { // merged with draw() - keep as reference
@@ -87,20 +232,15 @@ function draw(ctx, x1, y1, x2, y2, draw_color, draw_width) {
         // var mouseX = event.clientX - canvas.offsetLeft;
         // var mouseY = event.clientY - canvas.offsetTop;
 
-        // ctx.getImageData(0, 0, canvas.width, canvas.height);
-        
-        takeSnapshot();
+        ctx.getImageData(0, 0, canvas.width, canvas.height);
         ctx.beginPath(); // begin new canvas path
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
-        ctx.stroke();
         ctx.strokeStyle = draw_color;
         ctx.lineWidth = draw_width;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-    
-        // console.log(snapshot);
-
+        ctx.stroke();
     // }
     // event.preventDefault();
 }
@@ -127,6 +267,8 @@ function stop(event) {
 
 //#endregion
 
+// ===================================================================================
+// ===================================================================================
 //#region SUPPORTER FUNCTIONS - clear, un-redo, straight line, circle, polygon
 
 function getCanvasCoordinates(event) {
@@ -138,6 +280,7 @@ function getCanvasCoordinates(event) {
 
 // draw STRAIGHT LINE
 function drawLine(ctx, dragStartLocation, position, draw_color, draw_width) {
+    // takeSnapshot();
     ctx.beginPath();
     ctx.moveTo(dragStartLocation.mouseX, dragStartLocation.mouseY);
     ctx.lineTo(position.mouseX, position.mouseY);
@@ -217,145 +360,8 @@ function redo_last() {
 
 //#endregion
 
-//#region CONTROL ACTION and SEND to SERVER
-function mousedown_touchstart(event) {
-    if (!wsGame.isTurnToDraw) {
-        wsGame.isDrawing = false;
-        return;
-    }
-
-    // start(event);
-    var mouseX = event.clientX - canvas.offsetLeft;
-    var mouseY = event.clientY - canvas.offsetTop;
-    wsGame.startX = mouseX;
-    wsGame.startY = mouseY;
-    wsGame.isDrawing = true;
-
-    dragStart(event);
-}
-
-function mouse_touch_move(event) {
-    if (!wsGame.isTurnToDraw) {
-        return;
-    }
-
-    var shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
-        polygonSides = document.getElementById("polygonSides").value,
-        polygonAngle = document.getElementById("polygonAngle").value;
-
-    if (wsGame.isDrawing) {
-        var mouseX = event.clientX - canvas.offsetLeft;
-        var mouseY = event.clientY - canvas.offsetTop;
-
-        position = getCanvasCoordinates(event);
-
-        // console.log(mouseX, mouseY);
-
-        // if (!(mouseX === wsGame.startX && mouseY === wsGame.startY)) {
-
-            // restoreSnapshot();
-        if (shape === "normal")
-        {
-            draw(ctx, wsGame.startX, wsGame.startY, mouseX, mouseY, draw_color, draw_width);
-
-            var data = {};
-            data.dataType = wsGame.LINE_SEGMENT;
-            data.startX = wsGame.startX;
-            data.startY = wsGame.startY;
-            data.endX = mouseX;
-            data.endY = mouseY;
-            data.draw_color = draw_color;
-            data.draw_width = draw_width;
-            
-            wsGame.socket.send(JSON.stringify(data));
-
-            // console.log(data);
-
-            wsGame.startX = mouseX;
-            wsGame.startY = mouseY;
-        // }
-        }
-        if (shape === "line")
-        {
-            restoreSnapshot();
-            drawLine(ctx, dragStartLocation, position, draw_color, draw_width);
-            
-            var data = {};
-            data.dataType = wsGame.DRAW_LINE;
-            data.dragStartLocation = dragStartLocation;
-            data.position = position;
-            data.draw_color = draw_color;
-            data.draw_width = draw_width;
-
-            wsGame.socket.send(JSON.stringify(data));
-        }
-        if (shape === "circle")
-        {
-            restoreSnapshot();
-            drawCircle(ctx, dragStartLocation, position, radius, draw_color, draw_width);
-
-            var data = {};
-            data.dataType = wsGame.DRAW_CIRCLE;
-            data.dragStartLocation = dragStartLocation;
-            data.position = position;
-            data.radius = radius;
-            data.draw_color = draw_color;
-            data.draw_width = draw_width;
-
-            wsGame.socket.send(JSON.stringify(data));
-            // console.log(data.position);
-        }
-        if (shape === "polygon")
-        {
-            restoreSnapshot();
-            drawPolygon(ctx, dragStartLocation, position, coordinates, radius, indexPolygon, polygonSides, polygonAngle * (Math.PI / 180), draw_color, draw_width);
-
-            var data = {};
-            data.dataType = wsGame.DRAW_POLYGON;
-            data.dragStartLocation = dragStartLocation;
-            data.position = position;
-            data.coordinates = coordinates;
-            data.radius = radius;
-            data.indexPolygon = indexPolygon;
-            data.polygonSides = polygonSides;
-            data.polygonAngle = polygonAngle * (Math.PI / 180);
-            data.draw_color = draw_color;
-            data.draw_width = draw_width;
-
-            wsGame.socket.send(JSON.stringify(data));
-            // console.log(polygonSides);
-            // console.log(data.polygonSides);
-        }
-        else
-        {
-            ctx.stroke();
-        }
-        
-        // drawShape(position);
-        ctx.stroke();
-    }
-    event.preventDefault();
-}
-
-function mouse_up_out_touchend(event) {
-    stop(event);
-    event.preventDefault();
-
-    // stop drawing -> add the path inside array when mouse out
-    // if (event.type != "mouseout") {
-    //     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-    //     index += 1;
-    // }
-    
-    // console.log(restore_array);
-
-    var data = {};
-    data.dataType = wsGame.LINE_SEGMENT;
-    data.gameState = wsGame.MOUSE_UP;
-    wsGame.socket.send(JSON.stringify(data));
-}
-//#endregion
-
+// ===================================================================================
+// ===================================================================================
 //#region BONUS FEATURES
 function change_color(element) { draw_color = element.style.background; }
 

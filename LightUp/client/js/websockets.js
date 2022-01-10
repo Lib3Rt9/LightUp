@@ -94,7 +94,7 @@ $(function(){
                         index += 1;
                     // }
                     
-                    // console.log(restore_array);   
+                    console.log(restore_array);   
                 }
                 
                 if (data.gameState === wsGame.GAME_UNDO) {
