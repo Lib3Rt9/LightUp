@@ -129,51 +129,51 @@ function mouse_touch_move(event) {
                 restoreSnapshot();
                 drawLine(ctx, dragStartLocation, position, draw_color, draw_width);
                 
-                var data = {};
-                data.dataType = wsGame.DRAW_LINE;
-                data.dragStartLocation = dragStartLocation;
-                data.position = position;
-                data.draw_color = draw_color;
-                data.draw_width = draw_width;
+                // var data = {};
+                // data.dataType = wsGame.DRAW_LINE;
+                // data.dragStartLocation = dragStartLocation;
+                // data.position = position;
+                // data.draw_color = draw_color;
+                // data.draw_width = draw_width;
 
-                wsGame.socket.send(JSON.stringify(data));
+                // wsGame.socket.send(JSON.stringify(data));
             }
             if (shape === "circle")
             {
                 restoreSnapshot();
                 drawCircle(ctx, dragStartLocation, position, radius, draw_color, draw_width);
 
-                var data = {};
-                data.dataType = wsGame.DRAW_CIRCLE;
-                data.dragStartLocation = dragStartLocation;
-                data.position = position;
-                data.radius = radius;
-                data.draw_color = draw_color;
-                data.draw_width = draw_width;
+                // var data = {};
+                // data.dataType = wsGame.DRAW_CIRCLE;
+                // data.dragStartLocation = dragStartLocation;
+                // data.position = position;
+                // data.radius = radius;
+                // data.draw_color = draw_color;
+                // data.draw_width = draw_width;
 
-                wsGame.socket.send(JSON.stringify(data));
-                // console.log(data.position);
+                // wsGame.socket.send(JSON.stringify(data));
+                // // console.log(data.position);
             }
             if (shape === "polygon")
             {
                 restoreSnapshot();
                 drawPolygon(ctx, dragStartLocation, position, coordinates, radius, indexPolygon, polygonSides, calPolAngle, draw_color, draw_width);
 
-                var data = {};
-                data.dataType = wsGame.DRAW_POLYGON;
-                data.dragStartLocation = dragStartLocation;
-                data.position = position;
-                data.coordinates = coordinates;
-                data.radius = radius;
-                data.indexPolygon = indexPolygon;
-                data.polygonSides = polygonSides;
-                data.calPolAngle = calPolAngle;
-                data.draw_color = draw_color;
-                data.draw_width = draw_width;
+                // var data = {};
+                // data.dataType = wsGame.DRAW_POLYGON;
+                // data.dragStartLocation = dragStartLocation;
+                // data.position = position;
+                // data.coordinates = coordinates;
+                // data.radius = radius;
+                // data.indexPolygon = indexPolygon;
+                // data.polygonSides = polygonSides;
+                // data.calPolAngle = calPolAngle;
+                // data.draw_color = draw_color;
+                // data.draw_width = draw_width;
 
-                wsGame.socket.send(JSON.stringify(data));
-                console.log(calPolAngle);
-                console.log(data.calPolAngle);
+                // wsGame.socket.send(JSON.stringify(data));
+                // // console.log(calPolAngle);
+                // // console.log(data.calPolAngle);
             }
             // else
             // {
@@ -187,6 +187,49 @@ function mouse_touch_move(event) {
 }
 
 function mouse_up_out_touchend(event) {
+
+    var shape = document.querySelector('input[type="radio"][name="shape"]:checked').value;
+
+    if (shape === "line") {
+        var data = {};
+        data.dataType = wsGame.DRAW_LINE;
+        data.dragStartLocation = dragStartLocation;
+        data.position = position;
+        data.draw_color = draw_color;
+        data.draw_width = draw_width;
+
+        wsGame.socket.send(JSON.stringify(data));
+    }
+    if (shape === "circle") {
+        var data = {};
+        data.dataType = wsGame.DRAW_CIRCLE;
+        data.dragStartLocation = dragStartLocation;
+        data.position = position;
+        data.radius = radius;
+        data.draw_color = draw_color;
+        data.draw_width = draw_width;
+
+        wsGame.socket.send(JSON.stringify(data));
+        // console.log(data.position);
+    }
+    if (shape === "polygon") {
+        var data = {};
+        data.dataType = wsGame.DRAW_POLYGON;
+        data.dragStartLocation = dragStartLocation;
+        data.position = position;
+        data.coordinates = coordinates;
+        data.radius = radius;
+        data.indexPolygon = indexPolygon;
+        data.polygonSides = polygonSides;
+        data.calPolAngle = calPolAngle;
+        data.draw_color = draw_color;
+        data.draw_width = draw_width;
+
+        wsGame.socket.send(JSON.stringify(data));
+        // console.log(calPolAngle);
+        // console.log(data.calPolAngle);
+    }
+
     stop();
     event.preventDefault();
 
