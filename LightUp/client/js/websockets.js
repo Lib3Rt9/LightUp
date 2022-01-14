@@ -108,16 +108,71 @@ $(function(){
             else if (data.dataType === wsGame.DRAW_LINE) {
                 // restoreSnapshot();
                 drawLine(ctx, data.dragStartLocation, data.position, data.draw_color, data.draw_width);
+                console.log(data.draw_width);
+                if (data.gameState === wsGame.MOUSE_UP){
+                    stop();
+                    // event.preventDefault();
+
+                    // stop drawing -> add the path inside array when mouse out
+                    // if (event.type != "mouseout") {
+                        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                        index += 1;
+                    // }
+                    
+                    // console.log(restore_array);   
+                }
+                
+                if (data.gameState === wsGame.GAME_UNDO) {
+                    undo_last();
+                    console.log(restore_array);
+                    data.gameState = wsGame.WAITING_TO_START;
+                }
             }
             else if (data.dataType === wsGame.DRAW_CIRCLE) {
                 // restoreSnapshot();
                 drawCircle(ctx, data.dragStartLocation, data.position, data.radius, data.draw_color, data.width);
                 // console.log(data.position);
+                if (data.gameState === wsGame.MOUSE_UP){
+                    stop();
+                    // event.preventDefault();
+
+                    // stop drawing -> add the path inside array when mouse out
+                    // if (event.type != "mouseout") {
+                        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                        index += 1;
+                    // }
+                    
+                    // console.log(restore_array);   
+                }
+                
+                if (data.gameState === wsGame.GAME_UNDO) {
+                    undo_last();
+                    console.log(restore_array);
+                    data.gameState = wsGame.WAITING_TO_START;
+                }
             }
             else if (data.dataType === wsGame.DRAW_POLYGON) {
                 // restoreSnapshot();
                 drawPolygon(ctx, data.dragStartLocation, data.position, data.coordinates, data.radius, data.indexPolygon, data.polygonSides, data.calPolAngle, data.draw_color, data.width);
                 // console.log(data.polygonSides);
+                if (data.gameState === wsGame.MOUSE_UP){
+                    stop();
+                    // event.preventDefault();
+
+                    // stop drawing -> add the path inside array when mouse out
+                    // if (event.type != "mouseout") {
+                        restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                        index += 1;
+                    // }
+                    
+                    // console.log(restore_array);   
+                }
+                
+                if (data.gameState === wsGame.GAME_UNDO) {
+                    undo_last();
+                    console.log(restore_array);
+                    data.gameState = wsGame.WAITING_TO_START;
+                }
             }
             //#endregion
             
