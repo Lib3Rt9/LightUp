@@ -189,7 +189,8 @@ function mouse_touch_move(event) {
 function mouse_up_out_touchend(event) {
 
     var shape = document.querySelector('input[type="radio"][name="shape"]:checked').value;
-
+    stop();
+    event.preventDefault();
     // if (shape === "normal") {
         
     if (shape === "line") {
@@ -280,8 +281,8 @@ function mouse_up_out_touchend(event) {
         // data.gameState = wsGame.MOUSE_UP;
         // wsGame.socket.send(JSON.stringify(data));
     }
-    stop();
-    event.preventDefault();
+    // stop();
+    // event.preventDefault();
 
     // stop drawing -> add the path inside array when mouse out
     // if (event.type != "mouseout") {
