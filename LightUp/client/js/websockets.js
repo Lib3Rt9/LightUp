@@ -1,5 +1,6 @@
 //#region VARIABLE
 // response to the server
+var wsUrl = "ws://127.0.0.1:8000";
 
 // drawing logic
 var wsGame = {
@@ -49,7 +50,7 @@ $(function(){
         //#region SETUP CONNECTION
 
         // create connection with url of node server
-        wsGame.socket = new WebSocket("ws://127.0.0.1:8000");
+        wsGame.socket = new WebSocket(wsUrl);
 
         // on open event
         wsGame.socket.onopen = function(e) {
