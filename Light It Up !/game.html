@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Light It Up</title>
+    <link rel="stylesheet" href="css/template.css" media="screen">
+    <link rel="stylesheet" href="css/game.css" media="screen">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+  </head>
+  <body class="u-body">
+    <section class="u-clearfix u-image u-section-1" id="sec-0dfa" data-image-width="1280" data-image-height="720">
+      <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-2 u-shape-rectangle u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+          <h3 class="u-align-center u-text u-text-1">Hint: ___ ____</h3>
+        </div>
+      </div>
+
+      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-white u-shape-1"><canvas id="theCanvas"></canvas></div>
+      
+      <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-3 u-shape-rectangle u-group-2" id="notification" style="visibility: hidden;">
+        <div class="u-container-layout u-container-layout-2">
+          <h4 class="u-text u-text-2">Notifications<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>
+          </h4>
+          <h3 class="u-text u-text-default u-text-3">Choose a word to draw</h3>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-1">Button</a>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-2">Button</a>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-3">Button</a>
+        </div>
+      </div>
+
+      <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-2 u-shape-rectangle u-group-3">
+        <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-3">
+          <h3 class="u-align-center u-text u-text-4">Players</h3>
+        </div>
+      </div>
+      <div class="u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-list-item-1">
+            <div class="u-container-layout u-similar-container u-container-layout-4">
+              <img class="u-image u-image-default u-preserve-proportions u-image-1" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-2" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-5">Sample Headline</h6>
+              <h6 class="u-text u-text-6">Sample&nbsp;</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-5">
+              <img class="u-image u-image-default u-preserve-proportions u-image-3" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-4" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-7">Sample Headline</h6>
+              <h6 class="u-text u-text-8">Sample&nbsp;</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-6">
+              <img class="u-image u-image-default u-preserve-proportions u-image-5" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-6" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-9">Sample Headline
+              </h6>
+              <h6 class="u-text u-text-10">Sample&nbsp;</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-7">
+              <img class="u-image u-image-default u-preserve-proportions u-image-7" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-8" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-11">Sample Headline</h6>
+              <h6 class="u-text u-text-12">Sample</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-8">
+              <img class="u-image u-image-default u-preserve-proportions u-image-9" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-10" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-13">Sample Headline</h6>
+              <h6 class="u-text u-text-14">Sample</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-9">
+              <img class="u-image u-image-default u-preserve-proportions u-image-11" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-12" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-15">Sample Headline</h6>
+              <h6 class="u-text u-text-16">Sample&nbsp;</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-10">
+              <img class="u-image u-image-default u-preserve-proportions u-image-13" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-14" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-17">Sample Headline</h6>
+              <h6 class="u-text u-text-18">Sample&nbsp;</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-11">
+              <img class="u-image u-image-default u-preserve-proportions u-image-15" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-16" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-19">Sample Headline</h6>
+              <h6 class="u-text u-text-20">Sample</h6>
+            </div>
+          </div>
+          <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-12">
+              <img class="u-image u-image-default u-preserve-proportions u-image-17" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+              <img class="u-align-left u-image u-image-default u-preserve-proportions u-image-18" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+              <h6 class="u-text u-text-21">Sample Headline</h6>
+              <h6 class="u-text u-text-22">Sample&nbsp;</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-3 u-shape-rectangle u-group-4">
+        <div class="u-container-layout u-container-layout-13">
+          <h5 class="u-text u-text-23 hiddenscroll" id="chatmsg" style="overflow: auto;">Chat Messages<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8
+          </h5>
+        </div>
+      </div>
+
+      <div class="u-border-2 u-border-grey-75 u-palette-3-light-2 u-shape u-shape-rectangle u-shape-2"><textarea class="hiddenscroll" autofocus style="width: 100%; height: 50%;" id="guess"></textarea>
+        <h5 class="u-text u-text-23" style="text-align: center; color: darkslategrey;">Press - 'Enter' to guess</h5></div>
+
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-7 u-btn-4">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-5">UNDO</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-8 u-btn-6">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-white u-btn-7">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-9 u-btn-8">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-6 u-btn-9">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-4 u-btn-10">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-5 u-btn-11">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-10 u-btn-12">&nbsp;</a>
+      <a class="u-black u-border-2 u-border-grey-75 u-btn u-button-style u-btn-13">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-14">RESET</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-3 u-btn-15">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-16">Polygon&nbsp;<span class="u-icon u-icon-1"><svg class="u-svg-content" viewBox="0 0 16 16" style="width: 1em; height: 1em;"><polygon points="0,4 0,12 8,16 16,12 16,4 8,0 "></polygon></svg><img></span>
+      </a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-17">Circle&nbsp;<span class="u-icon u-icon-2"><svg class="u-svg-content" viewBox="0 0 512 512" style="width: 1em; height: 1em;"><g><g><path d="M256,48C141.1,48,48,141.1,48,256s93.1,208,208,208c114.9,0,208-93.1,208-208S370.9,48,256,48z M256,446.7    c-105.1,0-190.7-85.5-190.7-190.7c0-105.1,85.5-190.7,190.7-190.7c105.1,0,190.7,85.5,190.7,190.7    C446.7,361.1,361.1,446.7,256,446.7z"></path>
+</g>
+</g></svg><img></span>
+      </a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-18">Line&nbsp;<span class="u-file-icon u-icon u-icon-3"><img src="images/game/line.png" alt=""></span>
+      </a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-19">Normal&nbsp;<span class="u-file-icon u-icon u-text-black u-icon-4"><img src="images/game/dot.png" alt=""></span>
+      </a>
+
+      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-shape-3"><input type="range" min="1" max="100" value="50" 
+        style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 100%; "></div>
+    </section>
+    
+  </body>
+</html>
