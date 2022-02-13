@@ -9,7 +9,7 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
   </head>
-  <body class="u-body" onload="updateUser()">
+  <body class="u-body" onload="getFlags()">
     <section class="u-border-2 u-border-grey-75 u-clearfix u-image u-section-1" id="sec-0dfa" data-image-width="1280" data-image-height="720">
       <div class="u-clearfix u-sheet u-sheet-1">
         <button class="u-border-none u-btn u-btn-round u-button-style u-palette-3-light-2 u-radius-3 u-text-palette-1-dark-2 u-btn-1" onclick="toggle('profile')" id="guest">Guest&nbsp;<span class="u-icon u-text-palette-1-dark-2 u-icon-1"><svg class="u-svg-content" viewBox="0 0 490.677 490.677" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M489.272,37.339c-1.92-3.307-5.44-5.333-9.259-5.333H10.68c-3.819,0-7.339,2.027-9.259,5.333    c-1.899,3.307-1.899,7.36,0.021,10.667l234.667,405.333c1.899,3.307,5.419,5.333,9.237,5.333s7.339-2.027,9.237-5.333 L489.251,48.005C491.149,44.72,491.149,40.645,489.272,37.339z"></path></svg><img></span>
@@ -30,7 +30,7 @@
         </button>
         <button class="u-border-none u-btn u-button-style u-none u-btn-7" onclick="back()"><span class="u-file-icon u-icon u-icon-7"><img src="images/main/arrow_left.png" alt=""></span>&nbsp; 
         </button>
-        <button class="u-border-none u-btn u-button-style u-none u-btn-8" onclick="toggle('flags')"><span class="u-file-icon u-icon u-icon-8"><img src="images/flags/vn.png" alt=""></span>
+        <button class="u-border-none u-btn u-button-style u-none u-btn-8" onclick="toggle('flags')"><span class="u-file-icon u-icon u-icon-8"><img src="images/flags/vn.png" alt="" id="flag"></span>
         </button>
         <div class="u-expanded-width-xs u-form u-form-1">
           <form novalidate class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
@@ -40,58 +40,13 @@
             </div>
             <div class="u-align-center u-form-group u-form-submit">
               <button class="u-btn u-btn-submit u-button-style" style="visibility: hidden;" disabled>|</button>
-
             </div>
 
           </form>
         </div>
         <div class="u-list u-list-1 hiddenscroll" style="height: 149px; overflow: auto; visibility: hidden;" id="flags">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-1">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                <img class="u-image u-image-default u-preserve-proportions u-image-3" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-2">
-              <div class="u-container-layout u-similar-container u-container-layout-2">
-                <img class="u-image u-image-default u-preserve-proportions u-image-4" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-3">
-              <div class="u-container-layout u-similar-container u-container-layout-3">
-                <img class="u-image u-image-default u-preserve-proportions u-image-5" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-4">
-              <div class="u-container-layout u-similar-container u-container-layout-4">
-                <img class="u-image u-image-default u-preserve-proportions u-image-6" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-5">
-              <div class="u-container-layout u-similar-container u-container-layout-5">
-                <img class="u-image u-image-default u-preserve-proportions u-image-7" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-6">
-              <div class="u-container-layout u-similar-container u-container-layout-6">
-                <img class="u-image u-image-default u-preserve-proportions u-image-8" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-7">
-              <div class="u-container-layout u-similar-container u-container-layout-7">
-                <img class="u-image u-image-default u-preserve-proportions u-image-9" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-8">
-              <div class="u-container-layout u-similar-container u-container-layout-8">
-                <img class="u-image u-image-default u-preserve-proportions u-image-10" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
-            <div class="u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-shape-rectangle u-list-item-9">
-              <div class="u-container-layout u-similar-container u-container-layout-9">
-                <img class="u-image u-image-default u-preserve-proportions u-image-11" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-              </div>
-            </div>
+          <div class="u-repeater u-repeater-1" id="flags_list">
+
           </div>
         </div>
         <div class="u-expanded-width-xs u-list u-list-2 hiddenscroll" style="height: 446px; overflow: auto; visibility: hidden;" id="leaderboard">
@@ -127,7 +82,7 @@
             <div class="u-layout-row">
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
                 <div class="u-border-2 u-border-grey-75 u-container-layout u-container-layout-13">
-                  <img class="u-image u-image-default u-preserve-proportions u-image-15" src="images/flags_big/vn.png" alt="" data-image-width="160" data-image-height="120" id="nation">
+                  <img id="big_flag" class="u-image u-image-default u-preserve-proportions u-image-15" src="images/flags_big/vn.png" alt="" data-image-width="160" data-image-height="120" id="nation">
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
@@ -150,6 +105,7 @@
 
   </body>
     
+  <script src="js/flags.js"></script>
   <script src="js/main.js"></script>
   <script type="module" src="js/firebase.js"></script>
 </html>

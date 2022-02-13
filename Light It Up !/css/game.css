@@ -9,13 +9,12 @@
   outline: 0 !important;
 }
 
-#theCanvas {
-  width: 100%;
-  height: 100%;
-}
-
 #chatmsg {
   height: 456px;
+}
+
+#enter_btn {
+  visibility: hidden;
 }
 
 .u-section-1 .u-group-1 {
@@ -822,6 +821,13 @@
 }
 
 @media (max-width: 991px) {
+  #enter_btn {
+    visibility: visible;
+  }
+  #enter_header {
+    visibility: hidden;
+  }
+
   #chatmsg {
     height: 220px;
   }
@@ -1121,6 +1127,13 @@
 }
 
 @media (max-width: 767px) {
+  #enter_btn {
+    visibility: visible;
+  }
+  #enter_header {
+    visibility: hidden;
+  }
+
   #chatmsg {
     height: 220px;
   }
@@ -1296,6 +1309,13 @@
 }
 
 @media (max-width: 575px) {
+  #enter_btn {
+    visibility: visible;
+  }
+  #enter_header {
+    visibility: hidden;
+  }
+
   #chatmsg {
     height: 220px;
   }

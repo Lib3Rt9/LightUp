@@ -9,24 +9,24 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
   </head>
-  <body class="u-body">
+  <body class="u-body" onload="initCanvas()">
     <section class="u-clearfix u-image u-section-1" id="sec-0dfa" data-image-width="1280" data-image-height="720">
       <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-2 u-shape-rectangle u-group-1">
         <div class="u-container-layout u-container-layout-1">
-          <h3 class="u-align-center u-text u-text-1">Hint: ___ ____</h3>
+          <h3 class="u-align-center u-text u-text-1" id="wordhint">Hint: ___ ____</h3>
         </div>
       </div>
 
-      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-white u-shape-1"><canvas id="theCanvas"></canvas></div>
+      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-white u-shape-1" id="canvasContainer"><canvas id="theCanvas"></canvas></div>
       
       <div class="u-border-2 u-border-grey-75 u-container-style u-group u-palette-3-light-3 u-shape-rectangle u-group-2" id="notification" style="visibility: hidden;">
         <div class="u-container-layout u-container-layout-2">
           <h4 class="u-text u-text-2">Notifications<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>
           </h4>
-          <h3 class="u-text u-text-default u-text-3">Choose a word to draw</h3>
-          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-1">Button</a>
-          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-2">Button</a>
-          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-3">Button</a>
+          <h3 class="u-text u-text-default u-text-3" id="choices">Choose a word to draw</h3>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-1" id="w1" onclick="newWord(event)">Button1</a>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-2" id="w2" onclick="newWord(event)">Button2</a>
+          <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-grey-10 u-btn-3" id="w3" onclick="newWord(event)">Button3</a>
         </div>
       </div>
 
@@ -120,35 +120,37 @@
         </div>
       </div>
 
-      <div class="u-border-2 u-border-grey-75 u-palette-3-light-2 u-shape u-shape-rectangle u-shape-2"><textarea class="hiddenscroll" autofocus style="width: 100%; height: 50%;" id="guess"></textarea>
-        <h5 class="u-text u-text-23" style="text-align: center; color: darkslategrey;">Press - 'Enter' to guess</h5></div>
+      <div class="u-border-2 u-border-grey-75 u-palette-3-light-2 u-shape u-shape-rectangle u-shape-2"><textarea class="hiddenscroll" autofocus style="width: 100%; height: 50%;" id="guess" onkeypress="chat_guess(event)"></textarea>
+        <h5 class="u-text u-text-23" style="text-align: center; color: darkslategrey;" id="enter_header">Press - 'Enter' to guess</h5><button id="enter_btn" style="margin: 0; position: absolute; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);" onclick="chat_guess2()">Enter</button></div>
 
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-7 u-btn-4">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-5">UNDO</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-8 u-btn-6">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-white u-btn-7">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-9 u-btn-8">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-6 u-btn-9">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-4 u-btn-10">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-5 u-btn-11">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-10 u-btn-12">&nbsp;</a>
-      <a class="u-black u-border-2 u-border-grey-75 u-btn u-button-style u-btn-13">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-14">RESET</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-3 u-btn-15">&nbsp;</a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-16">Polygon&nbsp;<span class="u-icon u-icon-1"><svg class="u-svg-content" viewBox="0 0 16 16" style="width: 1em; height: 1em;"><polygon points="0,4 0,12 8,16 16,12 16,4 8,0 "></polygon></svg><img></span>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-7 u-btn-4" onclick="changeLC('#0000FF')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-5" onclick="undo()">UNDO</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-8 u-btn-6" onclick="changeLC('#FFC0CB')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-white u-btn-7" onclick="changeLC('#FFFFFF')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-9 u-btn-8" onclick="changeLC('#800080')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-6 u-btn-9" onclick="changeLC('#FFA500')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-4 u-btn-10" onclick="changeLC('#00FF00')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-5 u-btn-11" onclick="changeLC('#FFFF00')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-10 u-btn-12" onclick="changeLC('#964B00')">&nbsp;</a>
+      <a class="u-black u-border-2 u-border-grey-75 u-btn u-button-style u-btn-13" onclick="changeLC('#000000')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-14" onclick="resetCanvas()">RESET</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-custom-color-3 u-btn-15" onclick="changeLC('#FF0000')">&nbsp;</a>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-16" onclick="toggle('hexagon')">Hexagon&nbsp;<span class="u-icon u-icon-1"><svg class="u-svg-content" viewBox="0 0 16 16" style="width: 1em; height: 1em;"><polygon points="0,4 0,12 8,16 16,12 16,4 8,0 "></polygon></svg><img></span>
       </a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-17">Circle&nbsp;<span class="u-icon u-icon-2"><svg class="u-svg-content" viewBox="0 0 512 512" style="width: 1em; height: 1em;"><g><g><path d="M256,48C141.1,48,48,141.1,48,256s93.1,208,208,208c114.9,0,208-93.1,208-208S370.9,48,256,48z M256,446.7    c-105.1,0-190.7-85.5-190.7-190.7c0-105.1,85.5-190.7,190.7-190.7c105.1,0,190.7,85.5,190.7,190.7    C446.7,361.1,361.1,446.7,256,446.7z"></path>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-17" onclick="toggle('circle')">Circle&nbsp;<span class="u-icon u-icon-2"><svg class="u-svg-content" viewBox="0 0 512 512" style="width: 1em; height: 1em;"><g><g><path d="M256,48C141.1,48,48,141.1,48,256s93.1,208,208,208c114.9,0,208-93.1,208-208S370.9,48,256,48z M256,446.7    c-105.1,0-190.7-85.5-190.7-190.7c0-105.1,85.5-190.7,190.7-190.7c105.1,0,190.7,85.5,190.7,190.7    C446.7,361.1,361.1,446.7,256,446.7z"></path>
 </g>
 </g></svg><img></span>
       </a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-18">Line&nbsp;<span class="u-file-icon u-icon u-icon-3"><img src="images/game/line.png" alt=""></span>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-18" onclick="toggle('line')">Line&nbsp;<span class="u-file-icon u-icon u-icon-3"><img src="images/game/line.png" alt=""></span>
       </a>
-      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-19">Normal&nbsp;<span class="u-file-icon u-icon u-text-black u-icon-4"><img src="images/game/dot.png" alt=""></span>
+      <a class="u-border-2 u-border-grey-75 u-btn u-button-style u-palette-3-light-2 u-btn-19" onclick="toggle('normal')">Normal&nbsp;<span class="u-file-icon u-icon u-text-black u-icon-4"><img src="images/game/dot.png" alt=""></span>
       </a>
 
-      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-shape-3"><input type="range" min="1" max="100" value="50" 
+      <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-shape-3"><input type="range" min="2" max="18" value="10" step="2" id="linewidth" oninput="changeLW()"
         style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 100%; "></div>
     </section>
     
   </body>
+
+  <script src="js/game.js"></script>
 </html>
