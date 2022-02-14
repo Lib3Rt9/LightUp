@@ -114,7 +114,7 @@ function gameRoom() {
 
     // current turn
     this.playerTurn = 0;
-    this.wordList = ["lundi"];
+    this.wordList = ["lundii"];
     this.currentAnswer = undefined;
     this.currentGameState = WAITING_TO_START;
 
