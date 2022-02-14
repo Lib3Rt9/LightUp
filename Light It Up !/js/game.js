@@ -287,6 +287,11 @@ function generateWords(){
     }, 1000);    
 }
 
+function gameEnd(){
+    //document.getElementById('finalScore').value = ? ;
+    document.getElementById('gamend').submit();
+}
+
 const words = [
 "alligator",
 "america",

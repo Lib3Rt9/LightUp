@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/template.css" media="screen">
     <link rel="stylesheet" href="css/main.css" media="screen">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-
+    <?php include 'php/main.php'; ?> 
   </head>
   <body class="u-body" onload="getFlags()">
     <section class="u-border-2 u-border-grey-75 u-clearfix u-image u-section-1" id="sec-0dfa" data-image-width="1280" data-image-height="720">
@@ -30,13 +30,13 @@
         </button>
         <button class="u-border-none u-btn u-button-style u-none u-btn-7" onclick="back()"><span class="u-file-icon u-icon u-icon-7"><img src="images/main/arrow_left.png" alt=""></span>&nbsp; 
         </button>
-        <button class="u-border-none u-btn u-button-style u-none u-btn-8" onclick="toggle('flags')"><span class="u-file-icon u-icon u-icon-8"><img src="images/flags/vn.png" alt="" id="flag"></span>
+        <button class="u-border-none u-btn u-button-style u-none u-btn-8" onclick="toggle('flags')" id="flag_btn"><span class="u-file-icon u-icon u-icon-8"><img src="images/flags/vn.png" alt="" id="flag"></span>
         </button>
         <div class="u-expanded-width-xs u-form u-form-1">
           <form novalidate class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
             <div class="u-form-group u-form-name">
               <label for="name-1d20" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Enter your Name" id="name-1d20" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" autofocus="autofocus">
+              <input type="text" placeholder="Enter your Name" id="name-1d20" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" autofocus="autofocus" onkeypress="checkLength(event)">
             </div>
             <div class="u-align-center u-form-group u-form-submit">
               <button class="u-btn u-btn-submit u-button-style" style="visibility: hidden;" disabled>|</button>
@@ -50,31 +50,8 @@
           </div>
         </div>
         <div class="u-expanded-width-xs u-list u-list-2 hiddenscroll" style="height: 446px; overflow: auto; visibility: hidden;" id="leaderboard">
-          <div class="u-repeater u-repeater-2">
-            <div class="u-border-2 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-list-item-10">
-              <div class="u-container-layout u-similar-container u-container-layout-10">
-                <img class="u-image u-image-default u-preserve-proportions u-image-12" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-                <h3 class="u-text u-text-default u-text-2">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-3">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-4">Sample Headline</h3>
-              </div>
-            </div>
-            <div class="u-border-2 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-list-item-11">
-              <div class="u-container-layout u-similar-container u-container-layout-11">
-                <img class="u-image u-image-default u-preserve-proportions u-image-13" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-                <h3 class="u-text u-text-default u-text-5">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-6">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-7">Sample Headline</h3>
-              </div>
-            </div>
-            <div class="u-border-2 u-border-grey-75 u-container-style u-list-item u-palette-3-light-3 u-repeater-item u-list-item-12">
-              <div class="u-container-layout u-similar-container u-container-layout-12">
-                <img class="u-image u-image-default u-preserve-proportions u-image-14" src="images/flags/vn.png" alt="" data-image-width="80" data-image-height="60">
-                <h3 class="u-text u-text-default u-text-8">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-9">Sample Headline</h3>
-                <h3 class="u-text u-text-default u-text-10">Sample Headline</h3>
-              </div>
-            </div>
+          <div class="u-repeater u-repeater-2 hiddenscroll" id="top_player">
+            
           </div>
         </div>
         <div class="u-clearfix u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-layout-wrap u-palette-3-light-3 u-layout-wrap-1" style="visibility: hidden;" id="profile">
@@ -82,7 +59,7 @@
             <div class="u-layout-row">
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
                 <div class="u-border-2 u-border-grey-75 u-container-layout u-container-layout-13">
-                  <img id="big_flag" class="u-image u-image-default u-preserve-proportions u-image-15" src="images/flags_big/vn.png" alt="" data-image-width="160" data-image-height="120" id="nation">
+                  <img id="big_flag" class="u-image u-image-default u-preserve-proportions u-image-15" src="images/flags_big/vn.png" alt="" data-image-width="160" data-image-height="120">
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
@@ -92,9 +69,9 @@
                   <h3 class="u-text u-text-default u-text-13">Highest Score</h3>
                   <h1 class="u-text u-text-default u-text-14" id="highscore">.................</h1>
                   <h3 class="u-text u-text-default u-text-15">Total Score</h3>
-                  <h1 class="u-text u-text-default u-text-16" id="totalscore">.................</h1>
-                  <button class="u-border-none u-btn u-button-style u-none u-btn-10" onclick="window.location.href='modify.html';"><span class="u-file-icon u-icon u-icon-9"><img src="images/main/edit.png" alt=""></span>
-                  </button>
+                  <h1 class="u-text u-text-default u-text-16" id="totalscore">.................</h1> <!--onclick="hall()"--> <!--<form action="php/temp.php" method="POST"></form>-->
+                  <button class="u-border-none u-btn u-button-style u-none u-btn-10" onclick="modify()" disabled id="modify"><span class="u-file-icon u-icon u-icon-9"><img src="images/main/edit.png" alt=""></span>
+                  </form></button>
                 </div>
               </div>
             </div>
@@ -103,8 +80,13 @@
       </div>
     </section>
 
-  </body>
-    
+  </body> 
+  <script> 
+      var phpdata = [<?php echo json_encode($u); ?>,<?php echo json_encode($h); ?>,<?php echo json_encode($t); ?>,<?php echo json_encode($n); ?>];
+      var phplist = <?php echo json_encode($lists); ?>;
+      var phpid = <?php echo json_encode(strval($id)); ?>;
+      document.getElementById('modify').removeAttribute(<?php echo json_encode($disabled); ?>);
+  </script>
   <script src="js/flags.js"></script>
   <script src="js/main.js"></script>
   <script type="module" src="js/firebase.js"></script>
