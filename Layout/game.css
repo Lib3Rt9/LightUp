@@ -227,68 +227,7 @@ canvas {
   width: 30px;
   height: 20px;
 }
-.colorpalet-box .colorpalet .yellow {
-  background-color: yellow;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .orange {
-  background-color: orangered;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .red {
-  background-color: red;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .rose {
-  background-color: #ce4281;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .green {
-  background-color: green;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .lightblue {
-  background-color: #36b1c4;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .blue {
-  background-color: #1f5eca;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .darkblue {
-  background-color: #05054b;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .purple {
-  background-color: #7b16c9;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .brown {
-  background-color: #5e260c;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .black {
-  background-color: #050805;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .lightgray {
-  background-color: #bfc9ca;
-  width: 30px;
-  height: 20px;
-}
-.colorpalet-box .colorpalet .darkgray {
-  background-color: #4c4d4e;
+.colorpalet-box .colorpalet button {
   width: 30px;
   height: 20px;
 }
@@ -296,32 +235,9 @@ canvas {
   display: flex;
   justify-content: center;
 }
-.colorpalet-box .tools .pencil {
-  background-color: #d9e3ec;
-  width: 30px;
-  height: 25px;
-}
-.colorpalet-box .tools .brush {
-  background-color: #d9e3ec;
-  width: 30px;
-  height: 25px;
-}
-.colorpalet-box .tools .highlighter {
-  background-color: #d9e3ec;
-  width: 30px;
-  height: 25px;
-}
-.colorpalet-box .tools .pen {
-  background-color: #d9e3ec;
-  width: 30px;
-  height: 25px;
-}
-.colorpalet-box .tools .eraser {
-  background-color: #d9e3ec;
-  width: 30px;
-  height: 25px;
-}
-.colorpalet-box .tools .trash {
+.colorpalet-box .tools .pencil,
+.brush, .highlighter, .pen, .undo,
+.clear {
   background-color: #d9e3ec;
   width: 30px;
   height: 25px;
