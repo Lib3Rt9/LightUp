@@ -264,7 +264,7 @@ function getFlags() {
 
 function getFlags2() {
     for (let i = 0; i < flags.length; i++) {
-        flags_list.innerHTML += "<div class='u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-2 u-repeater-item u-list-item-1'><div class='u-container-layout u-similar-container u-container-layout-1'><img onclick='changeFlag(event)' class='u-image u-image-default u-preserve-proportions u-image-3' src='images/flags/" + flags[i] + "' data-image-width='80' data-image-height='60'></div></div>" ;
+        flags_list.innerHTML += "<div class='u-border-1 u-border-grey-75 u-container-style u-list-item u-palette-3-light-2 u-repeater-item u-list-item-1'><div class='u-container-layout u-similar-container u-container-layout-1'><img onclick='changeFlag2(event)' class='u-image u-image-default u-preserve-proportions u-image-3' src='images/flags/" + flags[i] + "' data-image-width='80' data-image-height='60'></div></div>" ;
     }
 };
 
@@ -273,4 +273,11 @@ function changeFlag(event) {
     var path = x.src.split('/')[x.src.split('/').length - 1];
     flag.src = "images/flags/" + path;
     big_flag.src = "images/flags_big/" + path;
+}
+
+function changeFlag2(event) {
+    var x = event.target;
+    var path = x.src.split('/')[x.src.split('/').length - 1];
+    flag.src = "images/flags/" + path;
+    nation.value = path;
 }

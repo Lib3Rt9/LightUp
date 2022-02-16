@@ -17,7 +17,7 @@
         <button class="u-border-none u-btn u-button-style u-none u-btn-2"> &nbsp; </button>
         <div class="u-expanded-width-sm u-expanded-width-xs u-form u-palette-3-light-2 u-form-1">
           <form action="php/signup.php" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;" 
-          onsubmit="return confirm('Create new account ?\nNote that you can change your national flag !');">
+          onsubmit="validateSignUp(event)">
             <div class="u-form-group u-form-name">
               <label for="username" class="u-label">Username</label>
               <input type="text" placeholder="Enter your Name" id="username" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" autofocus="autofocus">
@@ -28,7 +28,7 @@
             </div>
             <div class="u-align-center u-form-group u-form-submit">
               <button type="submit" class="u-border-none u-btn u-btn-submit u-button-style u-palette-1-light-2 u-btn-3">Sign-up</button>
-              <input type="text" value="images/flags/vn.png" class="u-form-control-hidden" name="nation" id="nation">
+              <input type="text" value="vn.png" class="u-form-control-hidden" name="nation" id="nation">
             </div>
           </form>
         </div>

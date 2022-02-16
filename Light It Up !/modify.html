@@ -16,8 +16,8 @@
         <button class="u-border-none u-btn u-button-style u-none u-btn-1"> &nbsp; </button>
         <button class="u-border-none u-btn u-button-style u-none u-btn-2"> &nbsp; </button>
         <div class="u-expanded-width-sm u-expanded-width-xs u-form u-palette-3-light-2 u-form-1">
-          <form action="php/index.php" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;"
-          onsubmit="return confirm('Modify your account ?');">
+          <form action="php/modify.php" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;"
+          onsubmit="validateModify(event)">
             <div class="u-form-group u-form-name">
               <label for="username" class="u-label">Username</label>
               <input type="text" placeholder="Enter your Name" id="username" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" autofocus="autofocus">
@@ -28,7 +28,8 @@
             </div>
             <div class="u-align-center u-form-group u-form-submit">
               <button type="submit" class="u-border-none u-btn u-btn-submit u-button-style u-palette-1-light-2 u-btn-3">Modify</button>
-              <input type="text" value="images/flags/vn.png" class="u-form-control-hidden" name="nation" id="nation">
+              <input type="text" value="vn.png" class="u-form-control-hidden" name="nation" id="nation">
+              <input type="text" value="" class="u-form-control-hidden" name="get_id" id="get_id" style="display: none;">
             </div>
           </form>
         </div>
@@ -45,7 +46,9 @@
         </div>
       </div>
     </section>
-    
+    <script>
+      document.getElementById('get_id').value = <?php echo json_encode($_GET['id']); ?>;
+    </script>
     <script src="js/flags.js"></script>
     <script src="js/index.js"></script>
   </body>

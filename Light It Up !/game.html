@@ -149,8 +149,14 @@
       <div class="u-border-2 u-border-grey-75 u-shape u-shape-rectangle u-shape-3"><input type="range" min="2" max="18" value="10" step="2" id="linewidth" oninput="changeLW()"
         style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 100%; "></div>
     </section>
+    <form action="php/gamend.php" method="POST" id="gamend">
+      <input id="finalScore" name="finalScore" value="" style="display: none;">
+      <input id="get_id" name="get_id" value="" style="display: none;">
+    </form>
     
   </body>
-
+  <script>
+    document.getElementById('get_id').value = <?php echo json_encode($_GET['id']); ?>;
+  </script>
   <script src="js/game.js"></script>
 </html>
