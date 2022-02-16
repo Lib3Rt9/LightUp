@@ -3,7 +3,9 @@ var port = 8000; // use 8000 as server port number
 
 // Server code --------------------------------------------------------------
 // use 'require' to load a function in a specific module
-var wsServer = require("ws").Server;
+var wsServer = require("ws").Server,
+    http = require("http").createServer().listen(port),
+    httpServer = new wsServer({ port: port }).attach(http);
 var server = new wsServer({ port: port });
 
 // node.js server is event based
@@ -18,7 +20,7 @@ var gameRoom = require("./game").gameRoom; // import gameRoom
 // var room1 = new Room(); // create a new meeting room
 var room1 = new gameRoom(); // create a new room
 
-server.on("connection", function(socket) {
+httpServer.on("connection", function(socket) {
 
     var user = new User(socket);
     
