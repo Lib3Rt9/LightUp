@@ -9,7 +9,7 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
   </head>
-  <body class="u-body">
+  <body class="u-body" id="hall">
     <section class="u-clearfix u-image u-section-1" id="sec-c811" data-image-width="1280" data-image-height="720">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-text u-text-body-alt-color u-text-default u-title u-text-1">Players</h1>
@@ -20,7 +20,7 @@
             <div class="u-form-group u-form-select u-form-group-1">
               <label for="select-dc6f" class="u-custom-font u-form-control-hidden u-label u-text-font u-label-1"></label>
               <div class="u-form-select-wrapper">
-                <select id="select-dc6f" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                <select id="select-dc6f" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" disabled>
                   <option value="2">2</option>
                   <option value="3" selected>3</option>
                   <option value="4">4</option>
@@ -37,7 +37,7 @@
             <div class="u-form-group u-form-select u-form-group-2">
               <label for="select-3ca8" class="u-custom-font u-form-control-hidden u-label u-text-font u-label-2"></label>
               <div class="u-form-select-wrapper">
-                <select id="select-3ca8" name="select-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                <select id="select-3ca8" name="select-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" disabled>
                   <option value="30">30</option>
                   <option value="40">40</option>
                   <option value="50">50</option>
@@ -51,10 +51,10 @@
             </div>
             <div class="u-form-group u-form-textarea u-form-group-3">
               <label for="textarea-4ce1" class="u-custom-font u-form-control-hidden u-label u-text-font u-label-3"></label>
-              <textarea rows="4" cols="50" id="textarea-4ce1" name="textarea" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" placeholder="List of Custom Words separated by comma. At least 4 words."></textarea>
+              <textarea rows="4" cols="50" id="textarea-4ce1" name="textarea" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" placeholder="List of Custom Words separated by comma. At least 4 words." disabled></textarea>
             </div>
             <div class="u-form-checkbox u-form-group u-form-group-4">
-              <input type="checkbox" id="checkbox-d998" name="checkbox" value="On">
+              <input type="checkbox" id="checkbox-d998" name="checkbox" value="On" disabled>
               <label for="checkbox-d998" class="u-custom-font u-label u-text-font u-label-4">Use Custom Words exclusively</label>
             </div>
             <div class="u-align-center u-form-group u-form-submit">
@@ -65,76 +65,78 @@
         </div>
         <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
           <div class="u-repeater u-repeater-1">
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container1" style="visibility: hidden;">
               <div class="u-container-layout u-similar-container u-container-layout-1">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-2" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-4">Sample Headline</h6>
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava1" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag1" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name1">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-2">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-3" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-4" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-5">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item"id="container2" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava2" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag2" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name2">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-3">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-5" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-6" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-6">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container3" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava3" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag3" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name3">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-4">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-7" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-8" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-7">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container4" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava4" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag4" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name4">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-5">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-9" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-10" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-8">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container5" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava5" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag5" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name5">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-6">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-11" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-12" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-9">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container6" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava6" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag6" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name6">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-7">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-13" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-14" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-10">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container7" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava7" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag7" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name7">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-8">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-15" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-16" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-11">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container8" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava8" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag8" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name8">Sample Headline</h6>
               </div>
             </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-9">
-                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-17" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
-                <img class="u-image u-image-default u-preserve-proportions u-image-18" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
-                <h6 class="u-text u-text-body-alt-color u-text-12">Sample Headline</h6>
+            <div class="u-align-center u-container-style u-list-item u-repeater-item" id="container9" style="visibility: hidden;">
+              <div class="u-container-layout u-similar-container u-container-layout-1">
+                <img class="u-image u-image-round u-preserve-proportions u-radius-10 u-image-1" id="ava9" src="images/characters/Trump_avatar.png" alt="" data-image-width="228" data-image-height="228">
+                <img class="u-image u-image-default u-preserve-proportions u-image-2" id="flag9" src="images/flags_small/vn.png" alt="" data-image-width="40" data-image-height="30">
+                <h6 class="u-text u-text-body-alt-color u-text-4" id="name9">Sample Headline</h6>
               </div>
             </div>
+            
           </div>
         </div>
         <h4 class="u-text u-text-body-alt-color u-text-default u-text-13">Draw time in seconds</h4>
         <h4 class="u-text u-text-body-alt-color u-text-default u-text-14">Add Custom Words</h4>
-        <button class="u-border-none u-btn u-button-style u-palette-3-light-1 u-text-body-alt-color u-btn-2" onclick="window.location.href='game.html';">Start Game</button>
+        <button class="u-border-none u-btn u-button-style u-palette-3-light-1 u-text-body-alt-color u-btn-2" id="start_btn">Start Game</button>
       </div>
     </section>
     
   </body>
+  <script type="module" src="js/firebase/hall.js"></script>
 </html>
