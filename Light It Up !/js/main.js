@@ -84,18 +84,6 @@ function modify() {
     window.location.href='modify.html?id='+phpid;
 }
 
-if (phpdata) { 
-    document.getElementById("flag").src = "images/flags/" + phpdata[3];
-    document.getElementById("flag_btn").removeAttribute("onclick");
-    document.getElementById("name-1d20").value = phpdata[0];
-    document.getElementById("name-1d20").setAttribute("disabled", "true");
-    document.getElementById("guest").innerHTML = phpdata[0] + '&nbsp;<span class="u-icon u-text-palette-1-dark-2 u-icon-1"><svg class="u-svg-content" viewBox="0 0 490.677 490.677" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M489.272,37.339c-1.92-3.307-5.44-5.333-9.259-5.333H10.68c-3.819,0-7.339,2.027-9.259,5.333    c-1.899,3.307-1.899,7.36,0.021,10.667l234.667,405.333c1.899,3.307,5.419,5.333,9.237,5.333s7.339-2.027,9.237-5.333 L489.251,48.005C491.149,44.72,491.149,40.645,489.272,37.339z"></path></svg><img></span>';
-    document.getElementById("user").innerHTML = phpdata[0];
-    document.getElementById("highscore").innerHTML = phpdata[1];
-    document.getElementById("totalscore").innerHTML = phpdata[2];
-    document.getElementById("big_flag").src = "images/flags_big/" + phpdata[3];
-}
-
 if (phplist) {
     for (var i = 0; i < phplist[0].length;i++){
         if (i == 0){
@@ -109,6 +97,18 @@ if (phplist) {
         }
     }
 }
+if (phpdata) { 
+    document.getElementById("flag").src = "images/flags/" + phpdata[3];
+    document.getElementById("flag_btn").removeAttribute("onclick");
+    document.getElementById("name-1d20").value = phpdata[0];
+    document.getElementById("name-1d20").setAttribute("disabled", "true");
+    document.getElementById("guest").innerHTML = phpdata[0] + '&nbsp;<span class="u-icon u-text-palette-1-dark-2 u-icon-1"><svg class="u-svg-content" viewBox="0 0 490.677 490.677" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M489.272,37.339c-1.92-3.307-5.44-5.333-9.259-5.333H10.68c-3.819,0-7.339,2.027-9.259,5.333    c-1.899,3.307-1.899,7.36,0.021,10.667l234.667,405.333c1.899,3.307,5.419,5.333,9.237,5.333s7.339-2.027,9.237-5.333 L489.251,48.005C491.149,44.72,491.149,40.645,489.272,37.339z"></path></svg><img></span>';
+    document.getElementById("user").innerHTML = phpdata[0];
+    document.getElementById("highscore").innerHTML = phpdata[1];
+    document.getElementById("totalscore").innerHTML = phpdata[2];
+    document.getElementById("big_flag").src = "images/flags_big/" + phpdata[3];
+}
+
 
 function checkLength(event){
     if (document.getElementById("name-1d20").value.length == 15){
